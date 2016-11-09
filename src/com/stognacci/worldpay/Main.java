@@ -16,6 +16,7 @@ public class Main {
         Employee dave1 = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
         Employee dave2 = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
 
+
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(seb);
         employees.add(nisha);
@@ -26,9 +27,10 @@ public class Main {
         }
         System.out.println("");
         Employee primary = employees.get(0);
+        System.out.println("********"+employees.get(1));
         System.out.println("primary = " + primary);
         Collections.rotate(employees, -1);
-        Employee secondary = employees.get(0);
+        Employee secondary = employees.get(2);
         System.out.println("secondary = " + secondary);
         Collections.rotate(employees, -1);
 
