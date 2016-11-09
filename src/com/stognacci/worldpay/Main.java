@@ -14,6 +14,7 @@ public class Main {
         Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1);
         Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
         Employee dave1 = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
+        Employee dave2 = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
 
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(seb);
