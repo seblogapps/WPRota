@@ -13,7 +13,7 @@ public class Main {
         Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3);
         Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1);
         Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
-
+        Employee dave1 = new Employee("Dave", "Reese", ExpLevel.EXP2, new Date[]{date});
 
         ArrayList<Employee> employees = new ArrayList<>();
         employees.add(seb);
