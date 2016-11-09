@@ -28,17 +28,16 @@ public class Main {
         }
         System.out.println("");
         Employee primary = employees.get(0);
-        System.out.println("********"+employees.get(1));
         System.out.println("primary = " + primary);
         Collections.rotate(employees, -1);
-        Employee secondary = employees.get(2);
+        Employee secondary = employees.get(0);
         System.out.println("secondary = " + secondary);
         Collections.rotate(employees, -1);
 
 //        Collections.shuffle(employees);
 
         for (Employee employee : employees) {
-            System.out.println("Rotate by 1 employee = " + employee);
+            System.out.println("Rotated after primary and secondary = " + employee);
         }
 
 
