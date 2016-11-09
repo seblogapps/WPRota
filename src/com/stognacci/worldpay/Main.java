@@ -31,7 +31,7 @@ public class Main {
         System.out.println("********"+employees.get(1));
         System.out.println("primary = " + primary);
         Collections.rotate(employees, -1);
-        Employee secondary = employees.get(2);
+        Employee secondary = employees.get(1);
         System.out.println("secondary = " + secondary);
         Collections.rotate(employees, -1);
 
