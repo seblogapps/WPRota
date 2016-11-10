@@ -7,20 +7,33 @@ public class Employee {
     private String firstName;
     private String lastName;
     private ExpLevel experience;
-    private Date [] holidays;
+    private boolean primary;
+    private boolean secondary;
+    private Date holidayStart;
+    private Date holidayEnd;
 
-    Employee(String firstName, String lastName, ExpLevel experience, Date[] holidays) {
+    Employee(String firstName, String lastName, ExpLevel experience, Date holidayStart, Date holidayEnd) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
-        this.holidays = holidays;
+        this.holidayStart = holidayStart;
+        this.holidayEnd = holidayEnd;
     }
 
     Employee(String firstName, String lastName, ExpLevel experience) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
+    }
+
+    public void setPrimary() {
+        this.primary = true;
+        this.secondary = false;
+    }
+
+    public void setSecondary() {
+        this.primary = false;
+        this.secondary = true;
     }
 
     @Override
@@ -29,7 +42,10 @@ public class Employee {
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", experience=" + experience +
-                ", holidays=" + Arrays.toString(holidays) +
+                ", primary=" + primary +
+                ", secondary=" + secondary +
+                ", holidayStart=" + holidayStart +
+                ", holidayEnd=" + holidayEnd +
                 '}';
     }
 }
