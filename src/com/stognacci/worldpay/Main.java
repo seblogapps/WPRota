@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 public class Main {
 
@@ -24,13 +25,24 @@ public class Main {
         Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3);
         Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3);
         Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1);
+        Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1);
         Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, testHolidayStartDate, testHolidayEndDate);
+        Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3);
+        Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2);
+        Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1);
 
-        ArrayList<Employee> employees = new ArrayList<>();
+        // Add all employee to employees arraylist
+        List<Employee> employees = new ArrayList<>();
         employees.add(seb);
         employees.add(nisha);
         employees.add(mark);
         employees.add(dave);
+        employees.add(jose);
+        employees.add(roy);
+        employees.add(hernan);
+        employees.add(bruno);
+
+        // Print out employees arraylist
         for (Employee employee : employees) {
             System.out.println("employee = " + employee);
         }
