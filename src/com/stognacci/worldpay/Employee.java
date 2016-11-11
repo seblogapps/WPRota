@@ -36,6 +36,10 @@ public class Employee {
         this.secondary = true;
     }
 
+    public ExpLevel getExperience() {
+        return experience;
+    }
+
     @Override
     public String toString() {
         return String.format("First: %-12s" +

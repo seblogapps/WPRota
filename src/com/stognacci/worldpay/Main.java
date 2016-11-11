@@ -10,7 +10,9 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
+        List<Employee> employees = new ArrayList<>();
+        List<Rota> rotas = new ArrayList<>();
+        
         SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
         String holidayStartDate = "23-12-2016";
         String holidayEndDate = "31-12-2016";
@@ -22,6 +24,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        // Test set of employee
         Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3);
         Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3);
         Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1);
@@ -32,7 +35,6 @@ public class Main {
         Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1);
 
         // Add all employee to employees arraylist
-        List<Employee> employees = new ArrayList<>();
         employees.add(seb);
         employees.add(nisha);
         employees.add(mark);
@@ -48,11 +50,18 @@ public class Main {
         }
         System.out.println("");
         Employee primary = employees.get(0);
+        System.out.println("Primary exp = " + primary.getExperience());
         System.out.println("primary = " + primary);
         Collections.rotate(employees, -1);
         Employee secondary = employees.get(0);
         System.out.println("secondary = " + secondary);
         Collections.rotate(employees, -1);
+        Rota rotaToInsert = new Rota(0, primary, secondary);
+        rotas.add(rotaToInsert);
+
+        for (Rota rota : rotas) {
+            System.out.println("rota = " + rota);
+        }
 
 //        Collections.shuffle(employees);
 
