@@ -38,14 +38,12 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", experience=" + experience +
-                ", primary=" + primary +
-                ", secondary=" + secondary +
-                ", holidayStart=" + holidayStart +
-                ", holidayEnd=" + holidayEnd +
-                '}';
+        return String.format("First: %-12s" +
+                "Last:%-16s" +
+                "Exp:%-6s" +
+                "Pri:%-8s" +
+                "Sec:%-8s" +
+                "HolStart:%-30s" +
+                "HolEnd:%-30s", firstName,lastName,experience, primary, secondary,holidayStart,holidayEnd);
     }
 }
