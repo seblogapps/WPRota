@@ -1,14 +1,13 @@
 package com.stognacci.worldpay;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class Employee {
     private String firstName;
     private String lastName;
     private ExpLevel experience;
-    private boolean primary;
-    private boolean secondary;
+    private boolean isPrimary;
+    private boolean isSecondary;
     private Date holidayStart;
     private Date holidayEnd;
 
@@ -26,14 +25,12 @@ public class Employee {
         this.experience = experience;
     }
 
-    public void setPrimary() {
-        this.primary = true;
-        this.secondary = false;
+    public void resetPrimary() {
+        this.isPrimary = false;
     }
 
-    public void setSecondary() {
-        this.primary = false;
-        this.secondary = true;
+    public void resetSecondary() {
+        this.isSecondary = false;
     }
 
     public ExpLevel getExperience() {
@@ -48,6 +45,6 @@ public class Employee {
                 "Pri:%-8s" +
                 "Sec:%-8s" +
                 "HolStart:%-30s" +
-                "HolEnd:%-30s", firstName,lastName,experience, primary, secondary,holidayStart,holidayEnd);
+                "HolEnd:%-30s", firstName,lastName,experience, isPrimary, isSecondary,holidayStart,holidayEnd);
     }
 }
