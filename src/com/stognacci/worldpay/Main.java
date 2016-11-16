@@ -71,7 +71,7 @@ public class Main {
 
 
         for (Rota rota : rotas) {
-            System.out.println("rota = " + rota);
+            System.out.println(rota);
         }
 
 //        Collections.shuffle(employees);

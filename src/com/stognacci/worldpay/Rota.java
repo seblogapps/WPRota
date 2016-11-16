@@ -28,10 +28,10 @@ public class Rota {
 
     @Override
     public String toString() {
-        return "Rota{" +
+        return "Rota: " +
                 "week=" + week +
-                ", primary=" + primary +
-                ", \n\tsecondary=" + secondary +
-                "}\n";
+                ", \n\tprimary   = " + primary +
+                ", \n\tsecondary = " + secondary +
+                "\n";
     }
 }
