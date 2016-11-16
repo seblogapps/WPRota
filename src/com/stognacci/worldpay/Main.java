@@ -25,14 +25,14 @@ public class Main {
         }
 
         // Test set of employee
-        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3);
-        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3);
-        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1);
-        Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1);
-        Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, testHolidayStartDate, testHolidayEndDate);
-        Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3);
-        Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2);
-        Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1);
+        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false);
+        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
+        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, false);
+        Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
+        Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, false, false);
+        Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3, false, false);
+        Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2, false, false);
+        Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1, false, false);
 
         // Add all employee to employees arraylist
         employees.add(seb);
@@ -48,6 +48,10 @@ public class Main {
         for (Employee employee : employees) {
             System.out.println("employee = " + employee);
         }
+
+        Employee primaryEmployee = PickEmployee.pickPrimary(employees);
+        System.out.println("primaryEmployee = " + primaryEmployee);
+
         System.out.println("");
         Employee primary = employees.get(0);
         System.out.println("Primary exp = " + primary.getExperience());
@@ -58,6 +62,7 @@ public class Main {
         Collections.rotate(employees, -1);
         Rota rotaToInsert = new Rota(0, primary, secondary);
         rotas.add(rotaToInsert);
+
 
         for (Rota rota : rotas) {
             System.out.println("rota = " + rota);

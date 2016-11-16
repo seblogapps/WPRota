@@ -19,6 +19,14 @@ public class Employee {
         this.holidayEnd = holidayEnd;
     }
 
+    Employee(String firstName, String lastName, ExpLevel experience, boolean isPrimary, boolean isSecondary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.experience = experience;
+        this.isPrimary = isPrimary;
+        this.isSecondary = isSecondary;
+    }
+
     Employee(String firstName, String lastName, ExpLevel experience) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,5 +54,13 @@ public class Employee {
                 "Sec:%-8s" +
                 "HolStart:%-30s" +
                 "HolEnd:%-30s", firstName,lastName,experience, isPrimary, isSecondary,holidayStart,holidayEnd);
+    }
+
+    public boolean getIsPrimary() {
+        return isPrimary;
+    }
+
+    public void setPrimary(boolean primary) {
+        this.isPrimary = primary;
     }
 }
