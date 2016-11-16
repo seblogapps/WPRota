@@ -25,9 +25,9 @@ public class Main {
         }
 
         // Test set of employee
-        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false);
-        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
-        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, false);
+        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, true, false);
+        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, true, false);
+        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, true);
         Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
         Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, false, false);
         Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3, false, false);
@@ -49,19 +49,25 @@ public class Main {
             System.out.println("employee = " + employee);
         }
 
-        Employee primaryEmployee = PickEmployee.pickPrimary(employees);
-        System.out.println("primaryEmployee = " + primaryEmployee);
-
         System.out.println("");
-        Employee primary = employees.get(0);
-        System.out.println("Primary exp = " + primary.getExperience());
-        System.out.println("primary = " + primary);
-        Collections.rotate(employees, -1);
-        Employee secondary = employees.get(0);
-        System.out.println("secondary = " + secondary);
-        Collections.rotate(employees, -1);
-        Rota rotaToInsert = new Rota(0, primary, secondary);
-        rotas.add(rotaToInsert);
+        for (int i = 0; i < 10; i++) {
+            Employee primary = PickEmployee.pickPrimary(employees);
+            System.out.println("primary   = " + primary);
+
+            Employee secondary = PickEmployee.pickSecondary(employees, primary);
+            System.out.println("secondary = " + secondary);
+
+            Rota rotaToInsert = new Rota(i+1, primary, secondary);
+            rotas.add(rotaToInsert);
+        }
+
+//        Employee primary = employees.get(0);
+//        System.out.println("Primary exp = " + primary.getExperience());
+//        System.out.println("primary = " + primary);
+//        Collections.rotate(employees, -1);
+//        Employee secondary = employees.get(0);
+//        System.out.println("secondary = " + secondary);
+//        Collections.rotate(employees, -1);
 
 
         for (Rota rota : rotas) {
@@ -71,7 +77,7 @@ public class Main {
 //        Collections.shuffle(employees);
 
         for (Employee employee : employees) {
-            System.out.println("Rotated after primary and secondary = " + employee);
+            System.out.println("Employees after primary and secondary selected = " + employee);
         }
 
 

@@ -31,7 +31,7 @@ public class Rota {
         return "Rota{" +
                 "week=" + week +
                 ", primary=" + primary +
-                ", secondary=" + secondary +
-                '}';
+                ", \n\tsecondary=" + secondary +
+                "}\n";
     }
 }

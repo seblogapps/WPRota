@@ -63,4 +63,12 @@ public class Employee {
     public void setPrimary(boolean primary) {
         this.isPrimary = primary;
     }
+
+    public boolean getIsSecondary() {
+        return isSecondary;
+    }
+
+    public void setSecondary(boolean secondary) {
+        this.isSecondary = secondary;
+    }
 }
