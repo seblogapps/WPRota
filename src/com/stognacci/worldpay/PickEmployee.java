@@ -19,7 +19,6 @@ public class PickEmployee {
                 primary = employees.get(i);
                 employees.get(i).setPrimary(true);
                 employees.add(employees.remove(i));
-                //i = employees.size();
             }
         }
         if (primary == null) {
@@ -28,15 +27,6 @@ public class PickEmployee {
             }
             primary = pickPrimary(employees);
         }
-        /*else {
-                if (i == employees.size() - 1) {
-                    for (int j = 0; j < employees.size(); j++) {
-                        employees.get(j).setPrimary(false);
-                    }
-                    i=-1;
-                }
-            }*/
-        //}
         return primary;
     }
 
