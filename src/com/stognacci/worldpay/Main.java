@@ -2,6 +2,10 @@ package com.stognacci.worldpay;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Main {
@@ -20,6 +24,21 @@ public class Main {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        //12 december 2014
+        LocalDate date3 = LocalDate.of(2016, Month.JANUARY, 10);
+        System.out.println("date3: " + date3);
+
+        //Get the current date
+        LocalDate date1 = LocalDate.now();
+        System.out.println("Current date: " + date1);
+
+        //add 1 month to the current date
+        LocalDate date2 = date1.plus(1, ChronoUnit.MONTHS);
+        System.out.println("Next month: " + date2);
+
+        Period period = Period.between(date2, date1);
+        System.out.println("Period: " + period);
 
         // Test set of employee
         Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false);
@@ -48,7 +67,7 @@ public class Main {
         }
 
         System.out.println("");
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 12; i++) {
             Employee primary = PickEmployee.pickPrimary(employees);
             //System.out.println("primary   = " + primary);
 

@@ -18,7 +18,8 @@ public class PickEmployee {
             if (!isPrimary) {
                 primary = employees.get(i);
                 employees.get(i).setPrimary(true);
-                employees.add(employees.remove(i));
+                employees.remove(i);
+                //employees.add(employees.remove(i));
             }
         }
         if (primary == null) {
@@ -35,27 +36,30 @@ public class PickEmployee {
         Employee secondary = null;
         ExpLevel primaryExpLevel = primary.getExperience();
 
-        for (int i = 0; (i < employees.size() - 1) && (secondary == null); i++) {
+        for (int i = 0; (i < employees.size() /*- 1*/) && (secondary == null); i++) {
             isSecondary = employees.get(i).getIsSecondary();
             if (!isSecondary) {
                 switch (primaryExpLevel) {
                     case EXP1:
                         secondary = employees.get(i);
                         employees.get(i).setSecondary(true);
-                        employees.add(employees.remove(i));
+                        employees.remove(i);
+                        //employees.add(employees.remove(i));
                         break;
                     case EXP2:
                         if (employees.get(i).getExperience() == ExpLevel.EXP1 || employees.get(i).getExperience() == ExpLevel.EXP2) {
                             secondary = employees.get(i);
                             employees.get(i).setSecondary(true);
-                            employees.add(employees.remove(i));
+                            employees.remove(i);
+                            //employees.add(employees.remove(i));
                         }
                         break;
                     case EXP3:
                         if (employees.get(i).getExperience() == ExpLevel.EXP1) {
                             secondary = employees.get(i);
                             employees.get(i).setSecondary(true);
-                            employees.add(employees.remove(i));
+                            employees.remove(i);
+                            //employees.add(employees.remove(i));
                         }
                         break;
                     default:
@@ -70,23 +74,11 @@ public class PickEmployee {
             }
             secondary = pickSecondary(employees, primary);
         }
-
-//        if (primaryExpLevel == ExpLevel.EXP1) {
-//            for (int i = 0; (i < employees.size() - 1) && (secondary == null); i++) {
-//                isSecondary = employees.get(i).getIsSecondary();
-//                if (!isSecondary) {
-//                    secondary = employees.get(i);
-//                    employees.get(i).setSecondary(true);
-//                    employees.add(employees.remove(i));
-//                }
-//            }
-//            if (secondary == null) {
-//                for (int i = 0; i < employees.size() - 1; i++) {
-//                    employees.get(i).setSecondary(false);
-//                }
-//                secondary = pickSecondary(employees, primary);
-//            }
-//        }
         return secondary;
+    }
+
+    public static void addToEnd(List<Employee> employees, Employee primary, Employee secondary) {
+        employees.add(primary);
+        employees.add(secondary);
     }
 }
