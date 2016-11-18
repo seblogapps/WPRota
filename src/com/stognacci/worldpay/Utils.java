@@ -17,7 +17,7 @@ public class Utils {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(datePattern);
         while (weekNumber == -1) {
             LocalDate date;
-            System.out.println(inputPrompt + " as "+datePattern);
+            System.out.println(inputPrompt + " as " + datePattern);
             String userInput = scanner.nextLine();
             //System.out.println("response = " + userInput);
             try {
@@ -34,4 +34,17 @@ public class Utils {
         }
         return weekNumber;
     }
+
+    //TODO: Probably a better way of doing that to consider if a rota has to be generated between end of one year and start of next year
+    public static int getDeltaWeeks(int rotaWeekStart, int rotaWeekEnd) {
+        if (rotaWeekEnd >= rotaWeekStart) {
+            return (rotaWeekEnd - rotaWeekStart) + 1;
+        } else if (rotaWeekStart == 52 && rotaWeekEnd == 1) {
+            return 1;
+        } else {
+            System.out.println("End date earlier than start date, please try again");
+            return -1;
+        }
+    }
 }
+
