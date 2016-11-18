@@ -10,6 +10,8 @@ import java.util.*;
 
 public class Main {
 
+    private static final String datePattern = "ddMMyyyy";
+
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
         List<Rota> rotas = new ArrayList<>();
@@ -24,6 +26,13 @@ public class Main {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        //Ask for rota starting and ending date
+        Scanner scanner = new Scanner(System.in);
+        int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", datePattern);
+        System.out.println("rotaWeekStart = " + rotaWeekStart);
+        int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", datePattern);
+        System.out.println("rotaWeekEnd = " + rotaWeekEnd);
 
         //12 december 2014
         LocalDate date3 = LocalDate.of(2016, Month.JANUARY, 10);
@@ -102,4 +111,6 @@ public class Main {
 
 
     }
+
+
 }
