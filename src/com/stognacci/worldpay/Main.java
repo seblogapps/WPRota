@@ -54,8 +54,14 @@ public class Main {
         Period period = Period.between(date2, date1);
         System.out.println("Period: " + period);
 
+        List<Holiday> testHolidayList = new ArrayList<>();
+        Date testHolidayStart = new Date(2016, 01, 01);
+        Date testHolidayEnd = new Date(2016, 01, 10);
+        Holiday testHoliday = new Holiday(testHolidayStart, testHolidayEnd);
+        testHolidayList.add(0, testHoliday);
+
         // Test set of employee
-        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false);
+        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false, testHolidayList);
         Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
         Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, true);
         Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
