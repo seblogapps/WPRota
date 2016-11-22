@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Main {
 
-    private static final String datePattern = "ddMMyyyy";
+    private static final String DATE_PATTERN = "ddMMyyyy";
 
     public static void main(String[] args) {
         List<Employee> employees = new ArrayList<>();
@@ -31,9 +31,9 @@ public class Main {
         //Ask for rota starting and ending date
         while (weeksForRota == -1) {
             Scanner scanner = new Scanner(System.in);
-            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", datePattern);
+            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
             System.out.println("rotaWeekStart = " + rotaWeekStart);
-            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", datePattern);
+            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
             System.out.println("rotaWeekEnd = " + rotaWeekEnd);
             weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
         }

@@ -1,6 +1,6 @@
 package com.stognacci.worldpay;
 
-import java.util.Date;
+import java.util.List;
 
 public class Employee {
     private String firstName;
@@ -8,18 +8,21 @@ public class Employee {
     private ExpLevel experience;
     private boolean isPrimary;
     private boolean isSecondary;
-    private Date holidayStart;
-    private Date holidayEnd;
+    private List<Holiday> holidays;
 
-    Employee(String firstName, String lastName, ExpLevel experience, Date holidayStart, Date holidayEnd) {
+    public Employee() {
+    }
+
+    public Employee(String firstName, String lastName, ExpLevel experience, Boolean isPrimary, Boolean isSecondary, List<Holiday> holidays) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
-        this.holidayStart = holidayStart;
-        this.holidayEnd = holidayEnd;
+        this.isPrimary = isPrimary;
+        this.isSecondary = isSecondary;
+        this.holidays = holidays;
     }
 
-    Employee(String firstName, String lastName, ExpLevel experience, boolean isPrimary, boolean isSecondary) {
+    public Employee(String firstName, String lastName, ExpLevel experience, boolean isPrimary, boolean isSecondary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
@@ -27,10 +30,12 @@ public class Employee {
         this.isSecondary = isSecondary;
     }
 
-    Employee(String firstName, String lastName, ExpLevel experience) {
+    public Employee(String firstName, String lastName, ExpLevel experience) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
+        this.isPrimary = false;
+        this.isSecondary = false;
     }
 
     public void resetPrimary() {
@@ -52,8 +57,7 @@ public class Employee {
                 "Exp:%-6s" +
                 "Pri:%-8s" +
                 "Sec:%-8s" +
-                "HolStart:%-30s" +
-                "HolEnd:%-30s", firstName,lastName,experience, isPrimary, isSecondary,holidayStart,holidayEnd);
+                "Holidays:%-30s" , firstName,lastName,experience, isPrimary, isSecondary, holidays);
     }
 
     public boolean getIsPrimary() {
