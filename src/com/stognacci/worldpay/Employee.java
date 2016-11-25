@@ -6,8 +6,8 @@ public class Employee {
     private String firstName;
     private String lastName;
     private ExpLevel experience;
-    private boolean isPrimary;
-    private boolean isSecondary;
+    private Boolean isPrimary;
+    private Boolean isSecondary;
     private List<Holiday> holidays;
 
     public Employee() {
@@ -22,7 +22,7 @@ public class Employee {
         this.holidays = holidays;
     }
 
-    public Employee(String firstName, String lastName, ExpLevel experience, boolean isPrimary, boolean isSecondary) {
+    public Employee(String firstName, String lastName, ExpLevel experience, Boolean isPrimary, Boolean isSecondary) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.experience = experience;
@@ -50,6 +50,30 @@ public class Employee {
         return experience;
     }
 
+    public Boolean getIsPrimary() {
+        return isPrimary;
+    }
+
+    public void setIsPrimary(Boolean primary) {
+        this.isPrimary = primary;
+    }
+
+    public Boolean getIsSecondary() {
+        return isSecondary;
+    }
+
+    public void setIsSecondary(Boolean secondary) {
+        this.isSecondary = secondary;
+    }
+
+    public List<Holiday> getHolidays() {
+        return holidays;
+    }
+
+    public void setHolidays(List<Holiday> holidays) {
+        this.holidays = holidays;
+    }
+
     @Override
     public String toString() {
         return String.format("First: %-12s" +
@@ -58,21 +82,5 @@ public class Employee {
                 "Pri:%-8s" +
                 "Sec:%-8s" +
                 "Holidays:%-30s" , firstName,lastName,experience, isPrimary, isSecondary, holidays);
-    }
-
-    public boolean getIsPrimary() {
-        return isPrimary;
-    }
-
-    public void setPrimary(boolean primary) {
-        this.isPrimary = primary;
-    }
-
-    public boolean getIsSecondary() {
-        return isSecondary;
-    }
-
-    public void setSecondary(boolean secondary) {
-        this.isSecondary = secondary;
     }
 }

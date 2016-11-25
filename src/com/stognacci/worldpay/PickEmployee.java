@@ -1,7 +1,5 @@
 package com.stognacci.worldpay;
 
-import javax.swing.text.StyledEditorKit;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,14 +15,14 @@ public class PickEmployee {
             isPrimary = employees.get(i).getIsPrimary();
             if (!isPrimary) {
                 primary = employees.get(i);
-                employees.get(i).setPrimary(true);
+                employees.get(i).setIsPrimary(true);
                 employees.remove(i);
                 //employees.add(employees.remove(i));
             }
         }
         if (primary == null) {
             for (Employee employee : employees) {
-                employee.setPrimary(false);
+                employee.setIsPrimary(false);
             }
             primary = pickPrimary(employees);
         }
@@ -42,14 +40,14 @@ public class PickEmployee {
                 switch (primaryExpLevel) {
                     case EXP1:
                         secondary = employees.get(i);
-                        employees.get(i).setSecondary(true);
+                        employees.get(i).setIsSecondary(true);
                         employees.remove(i);
                         //employees.add(employees.remove(i));
                         break;
                     case EXP2:
                         if (employees.get(i).getExperience() == ExpLevel.EXP1 || employees.get(i).getExperience() == ExpLevel.EXP2) {
                             secondary = employees.get(i);
-                            employees.get(i).setSecondary(true);
+                            employees.get(i).setIsSecondary(true);
                             employees.remove(i);
                             //employees.add(employees.remove(i));
                         }
@@ -57,7 +55,7 @@ public class PickEmployee {
                     case EXP3:
                         if (employees.get(i).getExperience() == ExpLevel.EXP1) {
                             secondary = employees.get(i);
-                            employees.get(i).setSecondary(true);
+                            employees.get(i).setIsSecondary(true);
                             employees.remove(i);
                             //employees.add(employees.remove(i));
                         }
@@ -70,7 +68,7 @@ public class PickEmployee {
         }
         if (secondary == null) {
             for (int i = 0; i < employees.size() - 1; i++) {
-                employees.get(i).setSecondary(false);
+                employees.get(i).setIsSecondary(false);
             }
             secondary = pickSecondary(employees, primary);
         }
