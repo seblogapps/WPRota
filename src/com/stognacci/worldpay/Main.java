@@ -9,13 +9,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     private static final String DATE_PATTERN = "ddMMyyyy";
 
     public static void main(String[] args) {
-        List<Employee> employees = new ArrayList<>();
+        //List<Employee> employees = new ArrayList<>();
         List<Rota> rotas = new ArrayList<>();
         int weeksForRota = -1;
         
@@ -34,9 +35,9 @@ public class Main {
         }
 
         String csvFileName = "Employees.csv";
-        List<Employee> employeesFromCSV;// = new ArrayList<>();
-        employeesFromCSV = ReadFromCSV.readFromCSVtoEmployees(csvFileName);
-        for (Employee employee : employeesFromCSV) {
+        List<Employee> employees;// = new ArrayList<>();
+        employees = ReadFromCSV.readFromCSVtoEmployees(csvFileName);
+        for (Employee employee : employees) {
             System.out.println("employee = " + employee);
             for (Holiday holiday : employee.getHolidays()) {
                 System.out.println("\tholiday = " + holiday);
@@ -44,15 +45,15 @@ public class Main {
         }
 
         //Ask for rota starting and ending date
-//        while (weeksForRota == -1) {
-//            Scanner scanner = new Scanner(System.in);
-//            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
-//            System.out.println("rotaWeekStart = " + rotaWeekStart);
-//            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
-//            System.out.println("rotaWeekEnd = " + rotaWeekEnd);
-//            weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
-//        }
-//        System.out.println("weeksForRota = " + weeksForRota);
+        while (weeksForRota == -1) {
+            Scanner scanner = new Scanner(System.in);
+            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
+            System.out.println("rotaWeekStart = " + rotaWeekStart);
+            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
+            System.out.println("rotaWeekEnd = " + rotaWeekEnd);
+            weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
+        }
+        System.out.println("weeksForRota = " + weeksForRota);
 
         //10 January 2016
         LocalDate date3 = LocalDate.of(2016, Month.JANUARY, 10);
@@ -78,41 +79,41 @@ public class Main {
         Period period = Period.between(date2, date1);
         System.out.println("Period: " + period);
 
-        // Test set of employee
-        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false, testHolidayList);
-        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
-        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, true);
-        Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
-        Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, false, false);
-        Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3, false, false);
-        Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2, false, false);
-        Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1, false, false);
-
-        // Add all employee to employees arraylist
-        employeesFromCSV.add(seb);
-        employeesFromCSV.add(nisha);
-        employeesFromCSV.add(mark);
-        employeesFromCSV.add(dave);
-        employeesFromCSV.add(jose);
-        employeesFromCSV.add(roy);
-        employeesFromCSV.add(hernan);
-        employeesFromCSV.add(bruno);
+//        // Test set of employee
+//        Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false, testHolidayList);
+//        Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
+//        Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, true);
+//        Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
+//        Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, false, false);
+//        Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3, false, false);
+//        Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2, false, false);
+//        Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1, false, false);
+//
+//        // Add all employee to employees arraylist
+//        employees.add(seb);
+//        employees.add(nisha);
+//        employees.add(mark);
+//        employees.add(dave);
+//        employees.add(jose);
+//        employees.add(roy);
+//        employees.add(hernan);
+//        employees.add(bruno);
 
         // Print out employees arraylist
         System.out.println("employee List");
-        for (Employee employee : employeesFromCSV) {
+        for (Employee employee : employees) {
             System.out.println(employee);
         }
 
         System.out.println("");
         for (int i = 0; i < weeksForRota; i++) {
-            Employee primary = PickEmployee.pickPrimary(employeesFromCSV);
+            Employee primary = PickEmployee.pickPrimary(employees);
             //System.out.println("primary   = " + primary);
 
-            Employee secondary = PickEmployee.pickSecondary(employeesFromCSV, primary);
+            Employee secondary = PickEmployee.pickSecondary(employees, primary);
             //System.out.println("secondary = " + secondary);
 
-            PickEmployee.addToEnd(employeesFromCSV, primary, secondary);
+            PickEmployee.addToEnd(employees, primary, secondary);
 
             Rota rotaToInsert = new Rota(i+1, primary, secondary);
             rotas.add(rotaToInsert);
@@ -134,7 +135,7 @@ public class Main {
 //        Collections.shuffle(employees);
 
         System.out.println("Employees after Rota is generated");
-        for (Employee employee : employeesFromCSV) {
+        for (Employee employee : employees) {
             System.out.println(employee);
         }
 
