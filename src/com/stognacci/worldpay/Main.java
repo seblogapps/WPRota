@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class Main {
 
@@ -21,26 +23,38 @@ public class Main {
         String holidayStartDate = "23-12-2016";
         String holidayEndDate = "31-12-2016";
         Date testHolidayStartDate = null, testHolidayEndDate = null;
+        List<Holiday> testHolidayList = new ArrayList<>();
         try {
             testHolidayStartDate = ft.parse(holidayStartDate);
             testHolidayEndDate = ft.parse(holidayEndDate);
+            Holiday testHoliday = new Holiday(testHolidayStartDate, testHolidayEndDate);
+            testHolidayList.add(0, testHoliday);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         //Ask for rota starting and ending date
-        while (weeksForRota == -1) {
-            Scanner scanner = new Scanner(System.in);
-            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
-            System.out.println("rotaWeekStart = " + rotaWeekStart);
-            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
-            System.out.println("rotaWeekEnd = " + rotaWeekEnd);
-            weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
-        }
-        System.out.println("weeksForRota = " + weeksForRota);
+//        while (weeksForRota == -1) {
+//            Scanner scanner = new Scanner(System.in);
+//            int rotaWeekStart = Utils.getWeekFromDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
+//            System.out.println("rotaWeekStart = " + rotaWeekStart);
+//            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
+//            System.out.println("rotaWeekEnd = " + rotaWeekEnd);
+//            weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
+//        }
+//        System.out.println("weeksForRota = " + weeksForRota);
 
-        //12 december 2014
+        //10 January 2016
         LocalDate date3 = LocalDate.of(2016, Month.JANUARY, 10);
+        //20 January 2016
+        LocalDate date20Jan = LocalDate.of(2016, Month.JANUARY, 20);
+        //30 January 2016
+        LocalDate date30Jan = LocalDate.of(2016, Month.JANUARY, 30);
+        //1 February 2016
+        LocalDate date1Feb = LocalDate.of(2016, Month.FEBRUARY, 1);
+
+        System.out.println("Utils.isInBetweenDates(date20Jan, date1Feb, date30Jan) = " + Utils.isInBetweenDates(date30Jan, date1Feb, date20Jan));
+
         System.out.println("date3: " + date3);
 
         //Get the current date
@@ -53,12 +67,6 @@ public class Main {
 
         Period period = Period.between(date2, date1);
         System.out.println("Period: " + period);
-
-        List<Holiday> testHolidayList = new ArrayList<>();
-        Date testHolidayStart = new Date(2016, 01, 01);
-        Date testHolidayEnd = new Date(2016, 01, 10);
-        Holiday testHoliday = new Holiday(testHolidayStart, testHolidayEnd);
-        testHolidayList.add(0, testHoliday);
 
         // Test set of employee
         Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false, testHolidayList);
