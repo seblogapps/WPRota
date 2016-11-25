@@ -33,6 +33,16 @@ public class Main {
             e.printStackTrace();
         }
 
+        String csvFileName = "Employees.csv";
+        List<Employee> employeesFromCSV;// = new ArrayList<>();
+        employeesFromCSV = ReadFromCSV.readFromCSVtoEmployees(csvFileName);
+        for (Employee employee : employeesFromCSV) {
+            System.out.println("employee = " + employee);
+            for (Holiday holiday : employee.getHolidays()) {
+                System.out.println("\tholiday = " + holiday);
+            }
+        }
+
         //Ask for rota starting and ending date
 //        while (weeksForRota == -1) {
 //            Scanner scanner = new Scanner(System.in);
@@ -79,30 +89,30 @@ public class Main {
         Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1, false, false);
 
         // Add all employee to employees arraylist
-        employees.add(seb);
-        employees.add(nisha);
-        employees.add(mark);
-        employees.add(dave);
-        employees.add(jose);
-        employees.add(roy);
-        employees.add(hernan);
-        employees.add(bruno);
+        employeesFromCSV.add(seb);
+        employeesFromCSV.add(nisha);
+        employeesFromCSV.add(mark);
+        employeesFromCSV.add(dave);
+        employeesFromCSV.add(jose);
+        employeesFromCSV.add(roy);
+        employeesFromCSV.add(hernan);
+        employeesFromCSV.add(bruno);
 
         // Print out employees arraylist
         System.out.println("employee List");
-        for (Employee employee : employees) {
+        for (Employee employee : employeesFromCSV) {
             System.out.println(employee);
         }
 
         System.out.println("");
         for (int i = 0; i < weeksForRota; i++) {
-            Employee primary = PickEmployee.pickPrimary(employees);
+            Employee primary = PickEmployee.pickPrimary(employeesFromCSV);
             //System.out.println("primary   = " + primary);
 
-            Employee secondary = PickEmployee.pickSecondary(employees, primary);
+            Employee secondary = PickEmployee.pickSecondary(employeesFromCSV, primary);
             //System.out.println("secondary = " + secondary);
 
-            PickEmployee.addToEnd(employees, primary, secondary);
+            PickEmployee.addToEnd(employeesFromCSV, primary, secondary);
 
             Rota rotaToInsert = new Rota(i+1, primary, secondary);
             rotas.add(rotaToInsert);
@@ -124,7 +134,7 @@ public class Main {
 //        Collections.shuffle(employees);
 
         System.out.println("Employees after Rota is generated");
-        for (Employee employee : employees) {
+        for (Employee employee : employeesFromCSV) {
             System.out.println(employee);
         }
 

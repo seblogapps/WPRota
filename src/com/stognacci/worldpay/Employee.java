@@ -38,6 +38,26 @@ public class Employee {
         this.isSecondary = false;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setExperience(ExpLevel experience) {
+        this.experience = experience;
+    }
+
     public void resetPrimary() {
         this.isPrimary = false;
     }
