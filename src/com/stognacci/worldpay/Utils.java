@@ -1,9 +1,11 @@
 package com.stognacci.worldpay;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
 import java.util.Date;
 import java.util.Locale;
@@ -14,18 +16,14 @@ import java.util.Scanner;
  */
 public class Utils {
 
-    public static int getWeekFromDate(Scanner scanner, String inputPrompt, String datePattern) {
-        int weekNumber = -1;
+    public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
+        LocalDate date = null;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(datePattern);
-        while (weekNumber == -1) {
-            LocalDate date;
+        while (date == null) {
             System.out.println(inputPrompt + " as " + datePattern);
             String userInput = scanner.nextLine();
-            //System.out.println("response = " + userInput);
             try {
                 date = LocalDate.parse(userInput, dateTimeFormatter);
-                WeekFields weekFields = WeekFields.of(Locale.getDefault());
-                weekNumber = date.get(weekFields.weekOfWeekBasedYear());
             } catch (DateTimeParseException e) {
                 System.out.println("Date entered : " + userInput + " is wrong - Any key or enter to try again, n to exit");
                 String again = scanner.nextLine();
@@ -34,19 +32,31 @@ public class Utils {
                 }
             }
         }
-        return weekNumber;
+        return date;
     }
 
-    //TODO: Probably a better way of doing that to consider if a rota has to be generated between end of one year and start of next year
-    public static int getDeltaWeeks(int rotaWeekStart, int rotaWeekEnd) {
-        if (rotaWeekEnd >= rotaWeekStart) {
-            return (rotaWeekEnd - rotaWeekStart) + 1;
-        } else if (rotaWeekStart == 52 && rotaWeekEnd == 1) {
-            return 1;
-        } else {
-            System.out.println("End date earlier than start date, please try again");
-            return -1;
-        }
+    public static long getTotalWeeks(LocalDate startWeekDate,LocalDate endWeekDate){
+        return ChronoUnit.WEEKS.between(startWeekDate, endWeekDate);
+    }
+
+    public static int getWeekNumber(LocalDate date){
+        WeekFields weekFields = WeekFields.of(Locale.getDefault());
+        int weekNumber=date.get(weekFields.weekOfWeekBasedYear());
+        return weekNumber;
+
+    }
+
+    public static LocalDate getWeekMonday(LocalDate date){
+        return date.with(DayOfWeek.MONDAY);
+    }
+
+    public static LocalDate getWeekSunday(LocalDate date){
+        return date.with(DayOfWeek.SUNDAY);
+    }
+
+    public static LocalDate getNextWeek(LocalDate currentWeekDate){
+        currentWeekDate = currentWeekDate.plusWeeks(1);
+        return currentWeekDate;
     }
 
     public static Boolean isInBetweenDates(LocalDate dateStart, LocalDate dateEnd, LocalDate dateToCheck) {
@@ -55,6 +65,10 @@ public class Utils {
 
     public static LocalDate convertToLocalDate(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public static Date convertToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 }
 
