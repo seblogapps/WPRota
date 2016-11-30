@@ -2,17 +2,19 @@ package com.stognacci.worldpay;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
+import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
 /**
  * Created by nisham on 16/11/16.
  */
-public class Utils {
+public class Utils  {
 
     public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
         LocalDate date = null;
@@ -67,6 +69,11 @@ public class Utils {
 
         return checkContinue;
     }
+
+    public static LocalDate convertToLocalDate(Date date)  {
+        return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
 
 }
 
