@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBool;
@@ -17,12 +17,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.rota.worldpay.Utils.DATE_PATTERN;
 /**
  * Created by sebastianot on 22/11/16.
  */
 public class ReadFromCSV {
 
-    private static final String DATE_PATTERN = "ddMMyyyy";
+ //   private static final String DATE_PATTERN = "ddMMyyyy";
 
     static final String[] FIELD_MAPPING = new String[]{
             "firstName",

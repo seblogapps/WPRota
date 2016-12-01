@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import java.io.File;
 import java.time.DayOfWeek;
@@ -19,10 +19,10 @@ import java.util.Scanner;
  */
 public class Utils {
 
-    public static final String CSVFILENAME = "Employees.csv";
-   // public static final String DATE_PATTERN = "dd/MM/yyyy";
+    public static final String CSVFILENAME = "Employee.csv";
+    public static final String DATE_PATTERN = "dd/MM/yyyy";
 
-    public static final String DATE_PATTERN = "ddMMyyyy";
+  //  public static final String DATE_PATTERN = "ddMMyyyy";
     public static final String ICAL_FILENAME = "WPRota.ics";
 
 
@@ -110,8 +110,8 @@ public class Utils {
     public static void renameFile() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentdate= String.valueOf(LocalDateTime.now().format(formatter));
-        File oldfile =new File("/home/nisham/WorkSpace/WPRota/Employees.csv");
-        File newfile =new File("/home/nisham/WorkSpace/WPRota/Employees"+currentdate+".csv");
+        File oldfile =new File(CSVFILENAME);
+        File newfile =new File("RotaBackup/"+currentdate+"_"+CSVFILENAME);
 
         if(!oldfile.renameTo(newfile)){
             System.out.println("Rename failed: "+oldfile);

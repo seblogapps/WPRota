@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -6,15 +6,14 @@ import net.fortuna.ical4j.model.parameter.Role;
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Version;
-import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.stognacci.worldpay.Utils.CSVFILENAME;
-import static com.stognacci.worldpay.Utils.formatter;
+import static com.rota.worldpay.Utils.CSVFILENAME;
+import static com.rota.worldpay.Utils.DATE_PATTERN;
 
 
 public class Main {
@@ -35,8 +34,8 @@ public class Main {
         long totalWeeks=-1;
 
         while (totalWeeks<0){
-          startWeekDate= Utils.getDate(scanner,"Start Date","ddMMyyyy");
-          endWeekDate= Utils.getDate(scanner,"End Date","ddMMyyyy");
+          startWeekDate= Utils.getDate(scanner,"Start Date",DATE_PATTERN);
+          endWeekDate= Utils.getDate(scanner,"End Date",DATE_PATTERN);
           totalWeeks=Utils.getTotalWeeks(startWeekDate, endWeekDate);
           if (totalWeeks<0){
               System.out.println("Start Date is less than End Date. Any key or enter to try again, n to exit");
@@ -50,25 +49,16 @@ public class Main {
         LocalDate currentWeekMonday=Utils.getWeekMonday(startWeekDate);
 
         for (long i=0;i<=totalWeeks;i++) {
-            System.out.println("");
-            System.out.println(StringUtils.repeat('=',75));
-            System.out.println("Generating Rota for Week " + Utils.getWeekNumber(currentWeekMonday) + " Start date: " + currentWeekMonday.format(formatter) + ", End date: " + Utils.getWeekSunday(currentWeekMonday).format(formatter));
-            System.out.println(StringUtils.repeat('=',75));
 
             Employee primary = PickOnCallEmp.pickPrimary(employees,Utils.getWeekNumber(currentWeekMonday));
-            System.out.println("PRIMARY IS " + primary);
-
             Employee secondary = PickOnCallEmp.pickSecondary(primary.getExperience(), employees,Utils.getWeekNumber(currentWeekMonday));
-            System.out.println("SECONDARY IS " + secondary);
-           // Rota rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
+
             Rota rotaToInsert = new Rota(currentWeekMonday, primary, secondary);
             rotas.add(rotaToInsert);
             currentWeekMonday=Utils.getNextWeek(currentWeekMonday);
         }
         System.out.println("Employees after Rota is generated");
-        for (Rota rota : rotas) {
-          System.out.println(rota);
-        }
+
         // Create new ics calendar
         Calendar newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
 
@@ -86,9 +76,6 @@ public class Main {
         if (newCal != null) {
             iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
         }
-
-        // Debug print generated calendar
-        System.out.println("newCal = " + newCal);
 
         Utils.renameFile();
             WriteToCSV.writeCSVFile(employees, CSVFILENAME);

@@ -1,11 +1,11 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.stognacci.worldpay.Utils.convertToLocalDate;
-import static com.stognacci.worldpay.Utils.getNextWeek;
+import static com.rota.worldpay.Utils.convertToLocalDate;
+import static com.rota.worldpay.Utils.getNextWeek;
 
 /**
  * Created by nisham on 14/11/16.

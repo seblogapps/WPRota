@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 import java.util.List;
 
 public class Employee {
@@ -9,33 +9,6 @@ public class Employee {
     private Boolean isSecondary;
     private List<Holiday> holidays;
 
-    /*public Employee() {
-    }
-
-    public Employee(String firstName, String lastName, ExpLevel experience, Boolean isPrimary, Boolean isSecondary, List<Holiday> holidays) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.experience = experience;
-        this.isPrimary = isPrimary;
-        this.isSecondary = isSecondary;
-        this.holidays = holidays;
-    }
-
-    public Employee(String firstName, String lastName, ExpLevel experience, Boolean isPrimary, Boolean isSecondary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.experience = experience;
-        this.isPrimary = isPrimary;
-        this.isSecondary = isSecondary;
-    }
-
-    public Employee(String firstName, String lastName, ExpLevel experience) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.experience = experience;
-        this.isPrimary = false;
-        this.isSecondary = false;
-    }*/
 
     public String getFirstName() {return firstName;}
     public String getLastName() {return lastName;}

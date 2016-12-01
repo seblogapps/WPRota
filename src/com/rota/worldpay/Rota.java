@@ -1,5 +1,7 @@
 
-package com.stognacci.worldpay;
+package com.rota.worldpay;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -44,11 +46,13 @@ public class Rota {
 
     @Override
     public String toString() {
-        return "Rota: " +
-                "week = " + week.format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
+        return  StringUtils.repeat('=',75) +
+                "\nRota: " +
+                "week = " + Utils.getWeekNumber(week) +
                 "\tfrom: " + (Utils.getWeekMonday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
-                "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
-                ", \n\tprimary   = " + primary +
+                "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
+                StringUtils.repeat('=',75)+
+                " \n\tprimary   = " + primary +
                 ", \n\tsecondary = " + secondary +
                 "\n";
     }
