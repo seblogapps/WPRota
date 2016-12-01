@@ -22,8 +22,6 @@ import java.util.List;
  */
 public class ReadFromCSV {
 
-    private static final String DATE_PATTERN = "ddMMyyyy";
-
     static final String[] FIELD_MAPPING = new String[]{
             "firstName",
             "lastName",
@@ -46,10 +44,10 @@ public class ReadFromCSV {
                 new ParseEnum(ExpLevel.class),             // experience
                 new ParseBool(),                           // isPrimary
                 new ParseBool(),                           // isSecondary
-                new Optional(new ParseDate(DATE_PATTERN)), // holidayStart1
-                new Optional(new ParseDate(DATE_PATTERN)), // holidayEnd1
-                new Optional(new ParseDate(DATE_PATTERN)), // holidayStart2
-                new Optional(new ParseDate(DATE_PATTERN)), // holidayEnd2
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart1
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd1
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart2
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd2
         };
 
         ICsvDozerBeanReader beanReader = null;

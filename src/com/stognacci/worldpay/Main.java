@@ -116,7 +116,7 @@ public class Main {
 
         System.out.println("");
         LocalDate rotaWeekDate = startWeekDate;
-        for (int i = 0; i < weeksForRota; i++) {
+        for (int i = 0; i <= weeksForRota; i++) {
             Employee primary = PickEmployee.pickPrimary(employees);
             //System.out.println("primary   = " + primary);
 
