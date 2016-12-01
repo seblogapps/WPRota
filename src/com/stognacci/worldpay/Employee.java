@@ -1,5 +1,4 @@
 package com.stognacci.worldpay;
-
 import java.util.List;
 
 public class Employee {
@@ -10,7 +9,7 @@ public class Employee {
     private Boolean isSecondary;
     private List<Holiday> holidays;
 
-    public Employee() {
+    /*public Employee() {
     }
 
     public Employee(String firstName, String lastName, ExpLevel experience, Boolean isPrimary, Boolean isSecondary, List<Holiday> holidays) {
@@ -36,63 +35,24 @@ public class Employee {
         this.experience = experience;
         this.isPrimary = false;
         this.isSecondary = false;
-    }
+    }*/
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getFirstName() {return firstName;}
+    public String getLastName() {return lastName;}
+    public ExpLevel getExperience() {return experience;}
+    public Boolean getIsPrimary() {return isPrimary;}
+    public Boolean getIsSecondary() {return isSecondary;}
+    public List<Holiday> getHolidays() {return holidays;}
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setExperience(ExpLevel experience) {this.experience = experience;}
+    public void setIsPrimary(Boolean primary) {this.isPrimary = primary;}
+    public void setIsSecondary(Boolean secondary) {this.isSecondary = secondary;}
+    public void setHolidays(List<Holiday> holidays) {this.holidays = holidays;}
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setExperience(ExpLevel experience) {
-        this.experience = experience;
-    }
-
-    public void resetPrimary() {
-        this.isPrimary = false;
-    }
-
-    public void resetSecondary() {
-        this.isSecondary = false;
-    }
-
-    public ExpLevel getExperience() {
-        return experience;
-    }
-
-    public Boolean getIsPrimary() {
-        return isPrimary;
-    }
-
-    public void setIsPrimary(Boolean primary) {
-        this.isPrimary = primary;
-    }
-
-    public Boolean getIsSecondary() {
-        return isSecondary;
-    }
-
-    public void setIsSecondary(Boolean secondary) {
-        this.isSecondary = secondary;
-    }
-
-    public List<Holiday> getHolidays() {
-        return holidays;
-    }
-
-    public void setHolidays(List<Holiday> holidays) {
-        this.holidays = holidays;
-    }
+    public void resetPrimary() {this.isPrimary = false;}
+    public void resetSecondary() {this.isSecondary = false;}
 
     @Override
     public String toString() {

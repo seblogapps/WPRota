@@ -1,9 +1,11 @@
 package com.stognacci.worldpay;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.stognacci.worldpay.Utils.convertToLocalDate;
+import static com.stognacci.worldpay.Utils.getNextWeek;
 
 /**
  * Created by nisham on 14/11/16.
@@ -17,7 +19,12 @@ public class PickOnCallEmp {
         for (int i = 0; i < employees.size() && primary == null; i++) {
           boolean onVacation=checkOnVacation(employees.get(i),weekNumber);
           isPrimary = employees.get(i).getIsPrimary();
-          if (isPrimary == false && onVacation==false) {
+            boolean canBePrimary=true;
+            if (employees.get(i).getExperience()==ExpLevel.EXP3){
+                canBePrimary=hasExp1(employees,weekNumber);
+            }
+
+          if (isPrimary == false && onVacation==false && canBePrimary==true) {
               primary = employees.get(i);
               employees.get(i).setIsPrimary(true);
               employees.add(employees.remove(i));
@@ -31,6 +38,16 @@ public class PickOnCallEmp {
             primary = pickPrimary(employees,weekNumber);
         }
         return primary;
+    }
+
+    public static boolean hasExp1(List<Employee> employees,int weekNumber) {
+        boolean hasExp1 = false;
+        for (int j = 0; j < employees.size() && hasExp1 == false; j++) {
+            if (employees.get(j).getExperience() == ExpLevel.EXP1 && !checkOnVacation(employees.get(j),weekNumber)) {
+                hasExp1 = true;
+            }
+        }
+        return hasExp1;
     }
 
 
@@ -101,19 +118,16 @@ public class PickOnCallEmp {
         //Preparing Holiday week Array
         for (Holiday holiday : employees.getHolidays()) {
             if (holiday.getHolidayStart() != null) {
-                int startHolidayWeekNumber = Utils.getWeekNumber(convertToLocalDate(holiday.getHolidayStart()));
-                int endHolidayWeekNumber = Utils.getWeekNumber(convertToLocalDate(holiday.getHolidayEnd()));
+                LocalDate currentWeekDate=convertToLocalDate(holiday.getHolidayStart());
                 long totalWeeks=Utils.getTotalWeeks(convertToLocalDate(holiday.getHolidayStart()),convertToLocalDate(holiday.getHolidayEnd()));
                 for (int j = 0; j <= totalWeeks; j++) {
-                    holidayWeeks.add(startHolidayWeekNumber);
-                    startHolidayWeekNumber++;
+                    holidayWeeks.add(Utils.getWeekNumber(currentWeekDate));
+                    currentWeekDate=getNextWeek(currentWeekDate);
                 }
-              //  System.out.println(holidayWeeks);
             }
         }
         return holidayWeeks.contains(weekNumber);
     }
-
 
 
 }
