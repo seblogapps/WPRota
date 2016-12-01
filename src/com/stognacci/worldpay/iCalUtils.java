@@ -4,16 +4,16 @@ import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.property.CalScale;
-import net.fortuna.ical4j.model.property.ProdId;
-import net.fortuna.ical4j.model.property.Uid;
-import net.fortuna.ical4j.model.property.Version;
+import net.fortuna.ical4j.model.parameter.Cn;
+import net.fortuna.ical4j.model.parameter.Role;
+import net.fortuna.ical4j.model.property.*;
 import net.fortuna.ical4j.util.UidGenerator;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -51,6 +51,14 @@ public class iCalUtils {
         Uid uid = uidGenerator.generateUid();
         event.getProperties().add(uid);
         return event;
+    }
+
+    public static Attendee setAttendee(Employee employee, String employeeDescription, Role role) {
+        String employeeEmail = employee.getFirstName() + "." + employee.getLastName() + "@worldpay.com";
+        Attendee attendee = new Attendee(URI.create(employeeEmail));
+        attendee.getParameters().add(role);
+        attendee.getParameters().add(new Cn(employeeDescription));
+        return attendee;
     }
 
     public static void writeIcal(Calendar calendar, String icsCalendarName) {

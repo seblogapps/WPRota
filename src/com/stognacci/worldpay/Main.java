@@ -2,6 +2,8 @@ package com.stognacci.worldpay;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.parameter.Role;
+import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Version;
 
@@ -137,6 +139,10 @@ public class Main {
             System.out.println(rota);
             // Add Rota event to calendar
             VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek());
+            Attendee attendee1 = iCalUtils.setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
+            Attendee attendee2 = iCalUtils.setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
+            rotaEventToAdd.getProperties().add(attendee1);
+            rotaEventToAdd.getProperties().add(attendee2);
             newCal.getComponents().add(rotaEventToAdd);
         }
         // Write generated calendar file
