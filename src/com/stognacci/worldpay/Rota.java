@@ -55,7 +55,9 @@ public class Rota {
     public String toStringforEventDescription() {
         return "week = " + Utils.getWeekNumber(week) +
                 ", primary = " + primary.getFirstName().substring(0,1) + "." + primary.getLastName() +
-                ", secondary = " + secondary.getFirstName().substring(0,1) + "." + secondary.getLastName()
+                "(" + primary.getExperience().toString() + ")" +
+                ", secondary = " + secondary.getFirstName().substring(0,1) + "." + secondary.getLastName() +
+                "(" + secondary.getExperience().toString() + ")"
                 ;
     }
 }
