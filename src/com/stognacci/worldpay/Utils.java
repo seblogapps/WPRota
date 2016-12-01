@@ -16,6 +16,8 @@ import java.util.Scanner;
  */
 public class Utils {
 
+    static final String DATE_PATTERN = "ddMMyyyy";
+
     public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
         LocalDate date = null;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(datePattern);
@@ -43,7 +45,6 @@ public class Utils {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
         int weekNumber=date.get(weekFields.weekOfWeekBasedYear());
         return weekNumber;
-
     }
 
     public static LocalDate getWeekMonday(LocalDate date){

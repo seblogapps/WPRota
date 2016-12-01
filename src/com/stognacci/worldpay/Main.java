@@ -142,7 +142,9 @@ public class Main {
             newCal.getComponents().add(rotaEventToAdd);
         }
         // Write generated calendar file
-        iCalUtils.writeIcal(newCal, "WPRota.ics");
+        if (newCal != null) {
+            iCalUtils.writeIcal(newCal, "WPRota.ics");
+        }
 
         // Debug print generated calendar
         System.out.println("newCal = " + newCal);
@@ -151,5 +153,8 @@ public class Main {
         for (Employee employee : employees) {
             System.out.println(employee);
         }
+
+        // Write the updated employees list to csv file
+        WriteToCSV.writeEmployeesToCSV(employees, "NewEmployees.csv");
     }
 }
