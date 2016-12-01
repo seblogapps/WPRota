@@ -15,8 +15,6 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final String DATE_PATTERN = "ddMMyyyy";
-
     public static void main(String[] args) {
         //List<Employee> employees = new ArrayList<>();
         List<Rota> rotas = new ArrayList<>();
@@ -57,8 +55,8 @@ public class Main {
 //            int rotaWeekEnd = Utils.getWeekFromDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
 //            System.out.println("rotaWeekEnd = " + rotaWeekEnd);
 //            weeksForRota = Utils.getDeltaWeeks(rotaWeekStart, rotaWeekEnd);
-            startWeekDate = Utils.getDate(scanner, "Please enter Rota starting date", DATE_PATTERN);
-            endWeekDate = Utils.getDate(scanner, "Please enter Rota ending date", DATE_PATTERN);
+            startWeekDate = Utils.getDate(scanner, "Please enter Rota starting date", Utils.DATE_PATTERN);
+            endWeekDate = Utils.getDate(scanner, "Please enter Rota ending date", Utils.DATE_PATTERN);
             weeksForRota = Utils.getTotalWeeks(startWeekDate, endWeekDate);
             if (weeksForRota <= 0) {
                 System.out.println("End date must be at least 1 week after start date, please enter the dates again");

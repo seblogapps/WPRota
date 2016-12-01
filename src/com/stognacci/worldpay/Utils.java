@@ -16,7 +16,7 @@ import java.util.Scanner;
  */
 public class Utils {
 
-    static final String DATE_PATTERN = "ddMMyyyy";
+    public static final String DATE_PATTERN = "ddMMyyyy";
 
     public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
         LocalDate date = null;

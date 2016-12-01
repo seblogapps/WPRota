@@ -44,9 +44,9 @@ public class Rota {
     @Override
     public String toString() {
         return "Rota: " +
-                "week = " + week.format(DateTimeFormatter.ofPattern(Main.DATE_PATTERN)) +
-                "\tfrom: " + (Utils.getWeekMonday(week)).format(DateTimeFormatter.ofPattern(Main.DATE_PATTERN)) +
-                "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Main.DATE_PATTERN)) +
+                "week = " + week.format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
+                "\tfrom: " + (Utils.getWeekMonday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
+                "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
                 ", \n\tprimary   = " + primary +
                 ", \n\tsecondary = " + secondary +
                 "\n";
