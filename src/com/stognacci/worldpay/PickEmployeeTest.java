@@ -15,26 +15,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class PickEmployeeTest {
     private List<Employee> employees = new ArrayList<>();
 
-    Employee seb = new Employee("Sebastiano", "Tognacci", ExpLevel.EXP3, false, false);
-    Employee nisha = new Employee("Nisha", "Monga", ExpLevel.EXP3, false, false);
-    Employee mark = new Employee("Mark", "Angel-Trueman", ExpLevel.EXP1, false, false);
-    Employee jose = new Employee("Jose", "Morena", ExpLevel.EXP1, false, false);
-    Employee dave = new Employee("Dave", "Reese", ExpLevel.EXP2, false, false);
-    Employee roy = new Employee("Roy","Reicher",ExpLevel.EXP3, false, false);
-    Employee hernan = new Employee("Hernan", "Rizzuti", ExpLevel.EXP2, false, false);
-    Employee bruno = new Employee("Bruno", "Dias", ExpLevel.EXP1, false, false);
-
     @BeforeEach
     void setUp() {
+        employees = ReadFromCSV.readFromCSVtoEmployees(Utils.EMPLOYEE_CSV_FILENAME);
         // Add all employee to employees arraylist
-        employees.add(seb);
-        employees.add(nisha);
-        employees.add(mark);
-        employees.add(dave);
-        employees.add(jose);
-        employees.add(roy);
-        employees.add(hernan);
-        employees.add(bruno);
         Collections.shuffle(employees);
     }
 
@@ -46,7 +30,6 @@ class PickEmployeeTest {
                 testPrimary = employees.get(i);
             }
         }
-
         Employee primary = PickEmployee.pickPrimary(employees);
         assertEquals(testPrimary, primary);
     }
