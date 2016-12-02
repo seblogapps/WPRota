@@ -48,7 +48,6 @@ public class Rota {
                 "week = " + Utils.getWeekNumber(week) +
                 "\tfrom: " + (Utils.getWeekMonday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
                 "\tto: " + (Utils.getWeekMonday(getNextWeek(week))).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
-             //   "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
                 StringUtils.repeat('=',75)+
                 " \n\tprimary   = " + primary +
                 ", \n\tsecondary = " + secondary +

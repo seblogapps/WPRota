@@ -110,11 +110,26 @@ public class Utils {
     public static void renameFile() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentdate= String.valueOf(LocalDateTime.now().format(formatter));
+        File directory = new File("RotaBackup/");
+        System.out.println(directory);
+        if (directory.exists() && directory.isFile())
+        {
+            System.out.println("The directory with name "+directory+" could not be created as it is a normal file");
+        }
+        else
+        {
+            if (!directory.exists())
+            {
+                directory.mkdir();
+            }
+
+        }
         File oldfile =new File(CSVFILENAME);
-        File newfile =new File("RotaBackup/"+currentdate+"_"+CSVFILENAME);
+        File newfile =new File(directory+"/"+currentdate+"_"+CSVFILENAME);
 
         if(!oldfile.renameTo(newfile)){
-            System.out.println("Rename failed: "+oldfile);
+            System.out.println(oldfile+" failed to move to backup folder, Taking backup in current folder");
+            oldfile.renameTo(new File(currentdate+"_"+CSVFILENAME));
         }
     }
 
