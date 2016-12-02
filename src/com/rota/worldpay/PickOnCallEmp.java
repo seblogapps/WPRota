@@ -30,9 +30,6 @@ public class PickOnCallEmp {
 
             if (primary==null && !toReset){
                 Utils.printRota();
-                for (Employee employee:employees){
-                    //System.out.println(employee);
-                }
                 System.out.println("There are not enough employees to select Primary for weekNumber "+weekNumber);
                 exitApplication();
             }

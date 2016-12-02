@@ -2,15 +2,10 @@ package com.rota.worldpay;
 
 import java.util.Date;
 
-/**
- * Created by sebastianot on 22/11/16.
- */
 public class Holiday {
-
 
     private Date holidayStart;
     private Date holidayEnd;
-
     public Holiday() {
     }
 
