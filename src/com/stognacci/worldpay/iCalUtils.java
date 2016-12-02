@@ -8,6 +8,7 @@ import net.fortuna.ical4j.model.parameter.Cn;
 import net.fortuna.ical4j.model.parameter.Role;
 import net.fortuna.ical4j.model.property.*;
 import net.fortuna.ical4j.util.UidGenerator;
+import org.apache.commons.lang3.time.DateUtils;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -30,16 +31,18 @@ public class iCalUtils {
         return cal;
     }
 
-    public static VEvent setEvent(String eventName, LocalDate rotaWeek) {
+    public static VEvent setEvent(String eventName, LocalDate rotaWeek, int shiftHourStart) {
+        // Create a VEvent for the rota from Monday to next Monday
         VEvent event = null;
         LocalDate rotaMonday = Utils.getWeekMonday(rotaWeek);
-        LocalDate rotaSunday = Utils.getWeekSunday(rotaWeek);
+        LocalDate rotaNextMonday = Utils.getNextWeek(rotaMonday);
         // Convert from LocalDate to Date since it's needed by DateTime constructor of iCal4j
         Date rotaMondayDate = Utils.convertToDate(rotaMonday);
-        Date rotaSundayDate = Utils.convertToDate(rotaSunday);
-
-        DateTime start = new DateTime(rotaMondayDate);
-        DateTime end = new DateTime(rotaSundayDate);
+        Date rotaNextMondayDate = Utils.convertToDate(rotaNextMonday);
+        Date mondayMorningDate = DateUtils.setHours(rotaMondayDate, shiftHourStart);
+        Date nextMondayMorningDate = DateUtils.setHours(rotaNextMondayDate, shiftHourStart);
+        DateTime start = new DateTime(mondayMorningDate);
+        DateTime end = new DateTime(nextMondayMorningDate);
         event = new VEvent(start, end, eventName);
         // generate unique identifier..
         UidGenerator uidGenerator = null;

@@ -19,6 +19,7 @@ public class Utils {
     public static final String DATE_PATTERN = "ddMMyyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";
     public static final String ICAL_FILENAME = "WPRota.ics";
+    public static final int SHIFT_HOUR_START = 9;
 
     public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
         LocalDate date = null;
