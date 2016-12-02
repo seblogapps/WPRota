@@ -9,10 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by nisham on 16/11/16.
@@ -21,9 +18,9 @@ public class Utils {
 
     public static final String CSVFILENAME = "Employee.csv";
     public static final String DATE_PATTERN = "dd/MM/yyyy";
-
-  //  public static final String DATE_PATTERN = "ddMMyyyy";
     public static final String ICAL_FILENAME = "WPRota.ics";
+    public static final int SHIFT_HOUR_HANDOVER = 9;
+    public static List<Rota> rotas = new ArrayList<>();
 
 
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
@@ -89,6 +86,9 @@ public class Utils {
     public static LocalDate getWeekMonday(LocalDate date) {
         return date.with(DayOfWeek.MONDAY);
     }
+    public static LocalDate getWeekTuesday(LocalDate date) {
+        return date.with(DayOfWeek.TUESDAY);
+    }
 
     public static LocalDate getWeekSunday(LocalDate date) {
         return date.with(DayOfWeek.SUNDAY);
@@ -117,6 +117,13 @@ public class Utils {
             System.out.println("Rename failed: "+oldfile);
         }
     }
+
+    public static void printRota(){
+        for (Rota rota : rotas) {
+            System.out.println(rota);
+        }
+    }
+
 
 }
 

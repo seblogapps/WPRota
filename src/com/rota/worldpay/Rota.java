@@ -2,13 +2,10 @@
 package com.rota.worldpay;
 
 import org.apache.commons.lang3.StringUtils;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import static com.rota.worldpay.Utils.getNextWeek;
 
-/**
- * Created by sebastianot on 11/11/16.
- */
 public class Rota {
     private LocalDate week;
     private Employee primary;
@@ -50,7 +47,8 @@ public class Rota {
                 "\nRota: " +
                 "week = " + Utils.getWeekNumber(week) +
                 "\tfrom: " + (Utils.getWeekMonday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +
-                "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
+                "\tto: " + (Utils.getWeekMonday(getNextWeek(week))).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
+             //   "\tto: " + (Utils.getWeekSunday(week)).format(DateTimeFormatter.ofPattern(Utils.DATE_PATTERN)) +"\n"+
                 StringUtils.repeat('=',75)+
                 " \n\tprimary   = " + primary +
                 ", \n\tsecondary = " + secondary +

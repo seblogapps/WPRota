@@ -18,12 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.rota.worldpay.Utils.DATE_PATTERN;
+import static com.rota.worldpay.Utils.exitApplication;
+
 /**
  * Created by sebastianot on 22/11/16.
  */
 public class ReadFromCSV {
-
- //   private static final String DATE_PATTERN = "ddMMyyyy";
 
     static final String[] FIELD_MAPPING = new String[]{
             "firstName",
@@ -84,10 +84,13 @@ public class ReadFromCSV {
             }
         } catch (FileNotFoundException ex) {
             System.err.println("Could not find the CSV file: " + ex);
+            exitApplication();
         } catch (IOException ex) {
             System.err.println("Error reading the CSV file: " + ex);
+            exitApplication();
         } catch (SuperCsvCellProcessorException ex) {
             System.err.println("Error in CSV file: " + ex);
+            exitApplication();
         } finally {
             if (beanReader != null) {
                 try {

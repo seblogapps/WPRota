@@ -6,17 +6,12 @@ import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.dozer.CsvDozerBeanWriter;
 import org.supercsv.io.dozer.ICsvDozerBeanWriter;
 import org.supercsv.prefs.CsvPreference;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-
 import static com.rota.worldpay.ReadFromCSV.FIELD_MAPPING;
 import static com.rota.worldpay.Utils.DATE_PATTERN;
 
-/**
- * Created by sebastianot on 01/12/16.
- */
 public class WriteToCSV {
 
     static void writeCSVFile(List<Employee> employees,String filename)  {

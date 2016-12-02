@@ -8,12 +8,10 @@ import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Version;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.rota.worldpay.Utils.CSVFILENAME;
-import static com.rota.worldpay.Utils.DATE_PATTERN;
+import static com.rota.worldpay.Utils.*;
 
 
 public class Main {
@@ -21,7 +19,6 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        List<Rota> rotas = new ArrayList<>();
         Scanner scanner=new Scanner(System.in);
         boolean checkContinue=true;
         LocalDate startWeekDate=null;
@@ -50,28 +47,29 @@ public class Main {
 
         for (long i=0;i<=totalWeeks;i++) {
 
-            Employee primary = PickOnCallEmp.pickPrimary(employees,Utils.getWeekNumber(currentWeekMonday));
-            Employee secondary = PickOnCallEmp.pickSecondary(primary.getExperience(), employees,Utils.getWeekNumber(currentWeekMonday));
+            Employee primary = PickOnCallEmp.pickPrimary(employees,Utils.getWeekNumber(currentWeekMonday),true);
+            Employee secondary = PickOnCallEmp.pickSecondary(primary.getExperience(), employees,Utils.getWeekNumber(currentWeekMonday),true);
 
             Rota rotaToInsert = new Rota(currentWeekMonday, primary, secondary);
             rotas.add(rotaToInsert);
             currentWeekMonday=Utils.getNextWeek(currentWeekMonday);
         }
-        System.out.println("Employees after Rota is generated");
 
         // Create new ics calendar
         Calendar newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
 
+        // Add Rota event to calendar
         for (Rota rota : rotas) {
-            System.out.println(rota);
-            // Add Rota event to calendar
-            VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek());
+            VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek(), Utils.SHIFT_HOUR_HANDOVER);
             Attendee attendee1 = iCalUtils.setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
             Attendee attendee2 = iCalUtils.setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
             rotaEventToAdd.getProperties().add(attendee1);
             rotaEventToAdd.getProperties().add(attendee2);
             newCal.getComponents().add(rotaEventToAdd);
         }
+        System.out.println("Employees after Rota is generated");
+        Utils.printRota();
+
         // Write generated calendar file
         if (newCal != null) {
             iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
