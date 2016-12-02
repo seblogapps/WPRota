@@ -15,9 +15,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //List<Employee> employees = new ArrayList<>();
+
         List<Rota> rotas = new ArrayList<>();
-        //int weeksForRota = -1;
         long weeksForRota = -1;
         LocalDate startWeekDate = null;
         LocalDate endWeekDate = null;
