@@ -1,0 +1,9 @@
+firstName,lastName,experience,isPrimary,isSecondary,holidayStart1,holidayEnd1,holidayStart2,holidayEnd2,holidayStart3,holidayEnd3,holidayStart4,holidayEnd4,holidayStart5,holidayEnd5,holidayStart6,holidayEnd6
+Jose,Morena,EXP3,true,true,,,,,,,,,,,,
+Roy,Reicher,EXP3,true,true,,,,,,,,,,,,
+Nisha,Monga,EXP3,true,true,10/04/2016,12/05/2016,20/11/2016,20/11/2016,,,,,,,,
+Mark,Angel-Trueman,EXP2,true,true,,,,,,,,,,,,
+Hernan,Rizzuti,EXP2,true,true,,,,,,,,,,,,
+Bruno,Dias,EXP2,true,true,,,,,,,,,,,,
+Dave,Rees,EXP1,true,true,,,,,,,,,,,,
+Sebastiano,Tognacci,EXP1,true,true,10/12/2016,10/12/2016,01/05/2016,10/05/2016,,,,,,,,
