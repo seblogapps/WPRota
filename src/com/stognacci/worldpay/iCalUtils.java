@@ -31,7 +31,7 @@ public class iCalUtils {
         return cal;
     }
 
-    public static VEvent setEvent(String eventName, LocalDate rotaWeek, int shiftHour) {
+    public static VEvent setEvent(String eventName, LocalDate rotaWeek, int shiftHourHandover) {
         // Create a VEvent for the rota from Monday to next Monday
         VEvent event = null;
         LocalDate rotaMonday = Utils.getWeekMonday(rotaWeek);
@@ -39,8 +39,8 @@ public class iCalUtils {
         // Convert from LocalDate to Date since it's needed by DateTime constructor of iCal4j
         Date rotaMondayDate = Utils.convertToDate(rotaMonday);
         Date rotaNextMondayDate = Utils.convertToDate(rotaNextMonday);
-        Date mondayStartShiftDate = DateUtils.setHours(rotaMondayDate, shiftHour);
-        Date nextMondayStopShiftDate = DateUtils.setHours(rotaNextMondayDate, shiftHour);
+        Date mondayStartShiftDate = DateUtils.setHours(rotaMondayDate, shiftHourHandover);
+        Date nextMondayStopShiftDate = DateUtils.setHours(rotaNextMondayDate, shiftHourHandover);
         DateTime start = new DateTime(mondayStartShiftDate);
         DateTime end = new DateTime(nextMondayStopShiftDate);
         event = new VEvent(start, end, eventName);
