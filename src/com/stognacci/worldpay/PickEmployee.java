@@ -1,5 +1,7 @@
 package com.stognacci.worldpay;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,6 +75,23 @@ public class PickEmployee {
             secondary = pickSecondary(employees, primary);
         }
         return secondary;
+    }
+
+    public static boolean checkOnVacation(Employee employees, int weekNumber) {
+        List<Integer> holidayWeeks = new ArrayList<>();
+
+        //Preparing Holiday week Array
+        for (Holiday holiday : employees.getHolidays()) {
+            if (holiday.getHolidayStart() != null) {
+                LocalDate currentWeekDate = Utils.convertToLocalDate(holiday.getHolidayStart());
+                long totalWeeks = Utils.getTotalWeeks(Utils.convertToLocalDate(holiday.getHolidayStart()), Utils.convertToLocalDate(holiday.getHolidayEnd()));
+                for (int j = 0; j <= totalWeeks; j++) {
+                    holidayWeeks.add(Utils.getWeekNumber(currentWeekDate));
+                    currentWeekDate = Utils.getNextWeek(currentWeekDate);
+                }
+            }
+        }
+        return holidayWeeks.contains(weekNumber);
     }
 
     public static void addToEnd(List<Employee> employees, Employee primary, Employee secondary) {
