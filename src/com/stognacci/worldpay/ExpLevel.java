@@ -1,4 +1,4 @@
-package com.rota.worldpay;
+package com.stognacci.worldpay;
 
 /**
  * Created by sebastianot on 08/11/16.

@@ -1,4 +1,4 @@
-package com.rota.worldpay;
+package com.stognacci.worldpay;
 
 import net.fortuna.ical4j.model.Calendar;
 import net.fortuna.ical4j.model.component.VEvent;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.rota.worldpay.Utils.*;
+import static com.stognacci.worldpay.Utils.*;
 
 
 public class Main {

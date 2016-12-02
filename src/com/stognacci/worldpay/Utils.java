@@ -1,4 +1,4 @@
-package com.rota.worldpay;
+package com.stognacci.worldpay;
 
 import java.io.File;
 import java.time.DayOfWeek;

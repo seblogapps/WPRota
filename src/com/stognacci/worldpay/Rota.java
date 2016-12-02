@@ -1,10 +1,10 @@
 
-package com.rota.worldpay;
+package com.stognacci.worldpay;
 
 import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import static com.rota.worldpay.Utils.getNextWeek;
+import static com.stognacci.worldpay.Utils.getNextWeek;
 
 public class Rota {
     private LocalDate week;
