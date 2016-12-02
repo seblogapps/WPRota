@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Calendar;
@@ -32,7 +32,7 @@ public class iCalUtils {
     }
 
     public static VEvent setEvent(String eventName, LocalDate rotaWeek, int shiftHourHandover) {
-        // Create a VEvent for the stognacci from Monday to next Monday
+        // Create a VEvent for the rota from Monday to next Monday
         VEvent event = null;
         LocalDate rotaMonday = Utils.getWeekMonday(rotaWeek);
         LocalDate rotaNextMonday = Utils.getNextWeek(rotaMonday);

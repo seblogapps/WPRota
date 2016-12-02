@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBool;
@@ -17,8 +17,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.stognacci.worldpay.Utils.DATE_PATTERN;
-import static com.stognacci.worldpay.Utils.exitApplication;
+import static com.rota.worldpay.Utils.DATE_PATTERN;
+import static com.rota.worldpay.Utils.exitApplication;
 
 /**
  * Created by sebastianot on 22/11/16.

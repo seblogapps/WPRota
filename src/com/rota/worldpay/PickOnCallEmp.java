@@ -1,10 +1,10 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.stognacci.worldpay.Utils.*;
+import static com.rota.worldpay.Utils.*;
 
 /**
  * Created by nisham on 14/11/16.

@@ -1,4 +1,4 @@
-package com.stognacci.worldpay;
+package com.rota.worldpay;
 
 import org.supercsv.cellprocessor.*;
 import org.supercsv.cellprocessor.constraint.NotNull;
@@ -9,8 +9,8 @@ import org.supercsv.prefs.CsvPreference;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import static com.stognacci.worldpay.ReadFromCSV.FIELD_MAPPING;
-import static com.stognacci.worldpay.Utils.DATE_PATTERN;
+import static com.rota.worldpay.ReadFromCSV.FIELD_MAPPING;
+import static com.rota.worldpay.Utils.DATE_PATTERN;
 
 public class WriteToCSV {
 
