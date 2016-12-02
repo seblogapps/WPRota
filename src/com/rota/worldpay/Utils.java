@@ -111,7 +111,6 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentdate= String.valueOf(LocalDateTime.now().format(formatter));
         File directory = new File("RotaBackup/");
-        System.out.println(directory);
         if (directory.exists() && directory.isFile())
         {
             System.out.println("The directory with name "+directory+" could not be created as it is a normal file");
