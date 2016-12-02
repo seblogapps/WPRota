@@ -3,9 +3,8 @@ package com.rota.worldpay;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import static com.rota.worldpay.Utils.convertToLocalDate;
-import static com.rota.worldpay.Utils.exitApplication;
-import static com.rota.worldpay.Utils.getNextWeek;
+
+import static com.rota.worldpay.Utils.*;
 
 /**
  * Created by nisham on 14/11/16.
@@ -16,24 +15,28 @@ public class PickOnCallEmp {
         boolean isPrimary = false;
         Employee primary = null;
         for (int i = 0; i < employees.size() && primary == null; i++) {
-            boolean onVacation=checkOnVacation(employees.get(i),weekNumber);
+            boolean onVacation = checkOnVacation(employees.get(i), weekNumber);
             isPrimary = employees.get(i).getIsPrimary();
-            boolean canBePrimary=true;
-            if (employees.get(i).getExperience()==ExpLevel.EXP3){
-                canBePrimary=hasExp1(employees,weekNumber);
+            boolean canBePrimary = true;
+            if (employees.get(i).getExperience() == ExpLevel.EXP3) {
+                canBePrimary = hasExp1(employees, weekNumber);
             }
-            if (isPrimary == false && onVacation==false && canBePrimary==true) {
+            if (isPrimary == false && onVacation == false && canBePrimary == true) {
                 primary = employees.get(i);
                 employees.get(i).setIsPrimary(true);
                 employees.add(employees.remove(i));
             }
+        }
 
             if (primary==null && !toReset){
                 Utils.printRota();
+                for (Employee employee:employees){
+                    //System.out.println(employee);
+                }
                 System.out.println("There are not enough employees to select Primary for weekNumber "+weekNumber);
                 exitApplication();
             }
-        }
+
 
         if (primary == null && toReset==true) {
             for (Employee employee : employees) {
@@ -95,7 +98,7 @@ public class PickOnCallEmp {
             }
 
 
-            if (secondary==null && toReset==true) {
+            if (secondary==null && toReset==true ) {
                 switch (primaryEx) {
                     case EXP1:
                         // to check here should be emp size or emp size -1
