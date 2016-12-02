@@ -22,7 +22,6 @@ public class Utils {
     public static final int SHIFT_HOUR_HANDOVER = 9;
     public static List<Rota> rotas = new ArrayList<>();
 
-
     public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
     public static void checkCSVHolidayFormat(List<Employee> employees) {
         for (Employee employee : employees) {
@@ -86,6 +85,7 @@ public class Utils {
     public static LocalDate getWeekMonday(LocalDate date) {
         return date.with(DayOfWeek.MONDAY);
     }
+
     public static LocalDate getWeekTuesday(LocalDate date) {
         return date.with(DayOfWeek.TUESDAY);
     }
