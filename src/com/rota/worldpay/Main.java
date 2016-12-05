@@ -53,7 +53,7 @@ public class Main {
         System.out.println("Employees after Rota is generated");
         //Printing generated rota
         Utils.printRota();
-        // Write generated calendar file
+        //Take backup of old CSV
         Utils.renameFile();
         //Write to CSV file
         WriteToCSV.writeCSVFile(employees, CSVFILENAME);
