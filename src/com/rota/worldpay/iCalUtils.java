@@ -18,6 +18,8 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.Date;
 
+import static com.rota.worldpay.Utils.rotas;
+
 /**
  * Created by sebastianot on 30/11/16.
  */
@@ -77,6 +79,22 @@ public class iCalUtils {
             calendarOutputter.output(calendar, fileOutputStream);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void createCalendar() {
+        Calendar newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
+        // Add Rota event to calendar
+        for (Rota rota : rotas) {
+            VEvent rotaEventToAdd = setEvent(rota.toStringforEventDescription(), rota.getWeek(), Utils.SHIFT_HOUR_HANDOVER);
+            Attendee attendee1 = setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
+            Attendee attendee2 = setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
+            rotaEventToAdd.getProperties().add(attendee1);
+            rotaEventToAdd.getProperties().add(attendee2);
+            newCal.getComponents().add(rotaEventToAdd);
+        }
+        if (newCal != null) {
+            iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
         }
     }
 }

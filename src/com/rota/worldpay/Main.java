@@ -1,12 +1,5 @@
 package com.rota.worldpay;
 
-import net.fortuna.ical4j.model.Calendar;
-import net.fortuna.ical4j.model.component.VEvent;
-import net.fortuna.ical4j.model.parameter.Role;
-import net.fortuna.ical4j.model.property.Attendee;
-import net.fortuna.ical4j.model.property.CalScale;
-import net.fortuna.ical4j.model.property.Version;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -54,28 +47,16 @@ public class Main {
             currentWeekMonday=Utils.getNextWeek(currentWeekMonday);
         }
 
+
         // Create new ics calendar
-        Calendar newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
-
-        // Add Rota event to calendar
-        for (Rota rota : rotas) {
-            VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek(), Utils.SHIFT_HOUR_HANDOVER);
-            Attendee attendee1 = iCalUtils.setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
-            Attendee attendee2 = iCalUtils.setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
-            rotaEventToAdd.getProperties().add(attendee1);
-            rotaEventToAdd.getProperties().add(attendee2);
-            newCal.getComponents().add(rotaEventToAdd);
-        }
+        iCalUtils.createCalendar();
         System.out.println("Employees after Rota is generated");
+        //Printing generated rota
         Utils.printRota();
-
         // Write generated calendar file
-        if (newCal != null) {
-            iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
-        }
-
         Utils.renameFile();
-            WriteToCSV.writeCSVFile(employees, CSVFILENAME);
+        //Write to CSV file
+        WriteToCSV.writeCSVFile(employees, CSVFILENAME);
 
     }
 }

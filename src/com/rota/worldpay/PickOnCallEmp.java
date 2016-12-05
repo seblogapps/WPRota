@@ -21,7 +21,7 @@ public class PickOnCallEmp {
             if (employees.get(i).getExperience() == ExpLevel.EXP3) {
                 canBePrimary = hasExp1(employees, weekNumber);
             }
-            if (isPrimary == false && onVacation == false && canBePrimary == true) {
+            if (!isPrimary && !onVacation && canBePrimary) {
                 primary = employees.get(i);
                 employees.get(i).setIsPrimary(true);
                 employees.add(employees.remove(i));
@@ -98,7 +98,6 @@ public class PickOnCallEmp {
             if (secondary==null && toReset==true ) {
                 switch (primaryEx) {
                     case EXP1:
-                        // to check here should be emp size or emp size -1
                         for (int j = 0; j < employees.size(); j++) {
                             employees.get(j).setIsSecondary(false);
                         }
@@ -128,11 +127,11 @@ public class PickOnCallEmp {
         //Preparing Holiday week Array
         for (Holiday holiday : employees.getHolidays()) {
             if (holiday.getHolidayStart() != null) {
-                LocalDate currentWeekDate=convertToLocalDate(holiday.getHolidayStart());
+                LocalDate holidayStartDate=convertToLocalDate(holiday.getHolidayStart());
                 long totalWeeks=Utils.getTotalWeeks(convertToLocalDate(holiday.getHolidayStart()),convertToLocalDate(holiday.getHolidayEnd()));
                 for (int j = 0; j <= totalWeeks; j++) {
-                    holidayWeeks.add(Utils.getWeekNumber(currentWeekDate));
-                    currentWeekDate=getNextWeek(currentWeekDate);
+                    holidayWeeks.add(Utils.getWeekNumber(holidayStartDate));
+                    holidayStartDate=getNextWeek(holidayStartDate);
                 }
             }
         }
