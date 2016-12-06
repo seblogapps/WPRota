@@ -48,6 +48,7 @@ public class Main {
         }
 
 
+
         // Create new ics calendar
         iCalUtils.createCalendar();
         System.out.println("Employees after Rota is generated");
