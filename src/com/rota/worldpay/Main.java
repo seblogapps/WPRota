@@ -47,15 +47,15 @@ public class Main {
             currentWeekMonday=Utils.getNextWeek(currentWeekMonday);
         }
 
-
+        System.out.println("Employees after Rota is generated");
+        Utils.printRota();
 
         // Create new ics calendar
         iCalUtils.createCalendar();
-        System.out.println("Employees after Rota is generated");
-        //Printing generated rota
-        Utils.printRota();
+
         //Take backup of old CSV
         Utils.renameFile();
+
         //Write to CSV file
         WriteToCSV.writeCSVFile(employees, CSVFILENAME);
 

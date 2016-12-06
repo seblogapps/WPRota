@@ -102,11 +102,6 @@ public class Utils {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
-    public static void exitApplication() {
-        System.out.println("Exiting from the application");
-        System.exit(0);
-    }
-
     public static void renameFile() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentdate= String.valueOf(LocalDateTime.now().format(formatter));
@@ -136,6 +131,11 @@ public class Utils {
         for (Rota rota : rotas) {
             System.out.println(rota);
         }
+    }
+
+    public static void exitApplication() {
+        System.out.println("Rota Generation unsuccessful"+"\n"+"Exiting from the application");
+        System.exit(0);
     }
 
 
