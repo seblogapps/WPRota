@@ -7,7 +7,10 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 /**
  * Created by sebastianot on 18/11/16.
@@ -74,7 +77,7 @@ public class Utils {
             for (Holiday holiday : employee.getHolidays()) {
                 if (holiday.getHolidayStart() != null) {
                     if (holiday.getHolidayEnd() == null) {
-                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday End Date not specified for Start Date: " + holiday.getHolidayStart());
+                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday end date not specified for Start Date: " + holiday.getHolidayStart());
                         System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
                         return false;
                     } else if (holiday.getHolidayEnd().before(holiday.getHolidayStart())) {
@@ -82,6 +85,10 @@ public class Utils {
                         System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
                         return false;
                     }
+                } else if (holiday.getHolidayEnd() != null){
+                    System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday start date not specified for End Date: " + holiday.getHolidayEnd());
+                    System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                    return false;
                 }
             }
         }
