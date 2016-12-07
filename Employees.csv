@@ -1,12 +1,12 @@
-firstName,lastName,experience,isPrimary,isSecondary,holidayStart1,holidayEnd1,holidayStart2,holidayEnd2
-Sebastiano,Tognacci,EXP3,false,false,01012016,10012016,01052016,10052016
-Nisha,Monga,EXP3,false,false,01022016,10022016,01032016,10032016
-Mark,Angel-Trueman,EXP1,false,true,,,,
-Jose,Morena,EXP1,false,false,,,,
-Dave,Reese,EXP2,false,false,,,,
-Roy,Reicher,EXP3,false,false,,,,
-Hernan,Rizzuti,EXP2,false,false,,,,
-Bruno,Dias,EXP1,false,false,,,,
+firstName,lastName,experience,isPrimary,isSecondary,holidayStart1,holidayEnd1,holidayStart2,holidayEnd2,holidayStart3,holidayEnd3,holidayStart4,holidayEnd4,holidayStart5,holidayEnd5,holidayStart6,holidayEnd6
+Sebastiano,Tognacci,EXP3,false,false,01/01/2016,10/01/2016,21/01/2016,21/01/2016,,,,,,,,
+Nisha,Monga,EXP3,false,false,01/02/2016,10/02/2016,01/03/2016,10/03/2016,,,,,,,,
+Mark,Angel-Trueman,EXP2,false,false,01/01/2016,10/01/2016,21/01/2016,21/01/2016,,,,,,,,
+Jose,Morena,EXP2,false,false,,,,,,,,,,,,
+Dave,Reese,EXP2,false,false,01/01/2016,10/01/2016,21/01/2016,21/01/2016,,,,,,,,
+Roy,Reicher,EXP2,false,false,01/01/2016,10/01/2016,21/01/2016,21/01/2016,,,,,,,,
+Hernan,Rizzuti,EXP2,false,false,01/01/2016,10/01/2016,21/01/2016,21/01/2016,,,,,,,,
+Bruno,Dias,EXP3,false,false,,,,,,,,,,,,
 
 
 

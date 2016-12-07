@@ -33,6 +33,14 @@ public class WriteToCSV {
                 new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd1
                 new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayStart2
                 new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd2
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayStart3
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd3
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayStart4
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd4
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayStart5
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd5
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayStart6
+                new Optional(new FmtDate(Utils.DATE_PATTERN)), // holidayEnd6
         };
 
         ICsvDozerBeanWriter beanWriter = null;
@@ -44,8 +52,8 @@ public class WriteToCSV {
             beanWriter.configureBeanMapping(Employee.class, FIELD_MAPPING);
 
             // write the header
-            beanWriter.writeHeader("firstName","lastName","experience","isPrimary",
-                    "isSecondary","holidayStart1","holidayEnd1","holidayStart2","holidayEnd2");
+            beanWriter.writeHeader("firstName","lastName","experience","isPrimary","isSecondary", "holidayStart1","holidayEnd1","holidayStart2","holidayEnd2",
+                    "holidayStart3","holidayEnd3","holidayStart4","holidayEnd4","holidayStart5","holidayEnd5","holidayStart6","holidayEnd6");
 
             // write the beans
             for (final Employee employee : employees) {

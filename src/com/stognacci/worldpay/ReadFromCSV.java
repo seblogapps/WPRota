@@ -31,7 +31,15 @@ public class ReadFromCSV {
             "holidays[0].holidayStart",
             "holidays[0].holidayEnd",
             "holidays[1].holidayStart",
-            "holidays[1].holidayEnd"
+            "holidays[1].holidayEnd",
+            "holidays[2].holidayStart",
+            "holidays[2].holidayEnd",
+            "holidays[3].holidayStart",
+            "holidays[3].holidayEnd",
+            "holidays[4].holidayStart",
+            "holidays[4].holidayEnd",
+            "holidays[5].holidayStart",
+            "holidays[5].holidayEnd"
     };
 
     static List<Employee> readFromCSVtoEmployees(String csvFileName) {
@@ -48,6 +56,14 @@ public class ReadFromCSV {
                 new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd1
                 new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart2
                 new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd2
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart3
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd3
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart4
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd4
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart5
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd5
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayStart6
+                new Optional(new ParseDate(Utils.DATE_PATTERN)), // holidayEnd6
         };
 
         ICsvDozerBeanReader beanReader = null;

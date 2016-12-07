@@ -7,16 +7,14 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by sebastianot on 18/11/16.
  */
 public class Utils {
 
-    public static final String DATE_PATTERN = "ddMMyyyy";
+    public static final String DATE_PATTERN = "dd/MM/yyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";
     public static final String ICAL_FILENAME = "WPRota.ics";
     public static final int SHIFT_HOUR_HANDOVER = 9;
@@ -70,5 +68,6 @@ public class Utils {
     public static Date convertToDate(LocalDate localDate) {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
+
 }
 

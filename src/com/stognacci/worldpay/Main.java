@@ -23,12 +23,12 @@ public class Main {
 
         List<Employee> employees;
         employees = ReadFromCSV.readFromCSVtoEmployees(Utils.EMPLOYEE_CSV_FILENAME);
-        for (Employee employee : employees) {
-            System.out.println("employee = " + employee);
-            for (Holiday holiday : employee.getHolidays()) {
-                System.out.println("\tholiday = " + holiday);
-            }
-        }
+//        for (Employee employee : employees) {
+//            System.out.println("employee = " + employee);
+//            for (Holiday holiday : employee.getHolidays()) {
+//                System.out.println("\tholiday = " + holiday);
+//            }
+//        }
 
         //Ask for rota starting and ending date
         while (weeksForRota <= 0) {
@@ -42,23 +42,50 @@ public class Main {
             System.out.println("weeksForRota = " + weeksForRota);
         }
 
-        // Print out employees arraylist
-        System.out.println("employee List");
-        for (Employee employee : employees) {
-            System.out.println(employee);
-        }
+//        // Print out employees arraylist
+//        System.out.println("employee List");
+//        for (Employee employee : employees) {
+//            System.out.println(employee);
+//        }
 
         System.out.println("");
         LocalDate rotaWeekDate = startWeekDate;
+        List<Employee> employeesOnDuty = new ArrayList<>();
+        List<Employee> employeesOnDutyWithCorrectExp = new ArrayList<>();
+        Rota rotaToInsert;
         for (int i = 0; i <= weeksForRota; i++) {
-            Employee primary = PickEmployee.pickPrimary(employees);
 
-            Employee secondary = PickEmployee.pickSecondary(employees, primary);
+            // 1 Clean the employees list and return just the ones not on holiday
+            employeesOnDuty = PickEmployee.pickOnDuty(employees, rotaWeekDate);
+            for (Employee employee : employeesOnDuty) {
+                System.out.println("employee on duty for week : " + rotaWeekDate + " - " + employee);
+            }
+            // 2 Check if EXP3 exists, if yes and no EXP1 then remove EXP3 from employees list
+            employeesOnDutyWithCorrectExp = PickEmployee.canCreateRota(employeesOnDuty);
+            for (Employee employee : employeesOnDutyWithCorrectExp) {
+                System.out.println("employee with correct EXP = " + employee + " for week " + rotaWeekDate);
+            }
+            System.out.println("employeesOnDutyWithCorrectExp size = " + employeesOnDutyWithCorrectExp.size());
+            // 4 Re add to top of employees list the removed employees
 
-            PickEmployee.addToEnd(employees, primary, secondary);
+            // 3 If at least 3 employees, Select primary and secondary
+            if (employeesOnDutyWithCorrectExp.size() >= 2) {
+                Employee primary = PickEmployee.pickPrimary(employeesOnDutyWithCorrectExp);
+                System.out.println("*** primary   = " + primary);
+                Employee secondary = PickEmployee.pickSecondary(employeesOnDutyWithCorrectExp, primary);
+                System.out.println("*** secondary = " + secondary);
 
-            Rota rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
+                employees.remove(primary);
+                employees.remove(secondary);
+                PickEmployee.addToEnd(employees, primary, secondary);
+
+                rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
+            } else {
+                System.out.println("Not enough employees to generate Rota for rotaWeekDate = " + rotaWeekDate);
+                rotaToInsert = new Rota(rotaWeekDate, "No_available_primary", "No_available_secondary");
+            }
             rotas.add(rotaToInsert);
+
             rotaWeekDate = Utils.getNextWeek(rotaWeekDate);
         }
 

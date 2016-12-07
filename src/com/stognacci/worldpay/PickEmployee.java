@@ -69,33 +69,93 @@ public class PickEmployee {
             }
         }
         if (secondary == null) {
-            for (int i = 0; i < employees.size() - 1; i++) {
-                employees.get(i).setIsSecondary(false);
+            for (Employee employee : employees) {
+                employee.setIsSecondary(false);
             }
             secondary = pickSecondary(employees, primary);
         }
         return secondary;
     }
 
-    public static boolean checkOnVacation(Employee employees, int weekNumber) {
+    public static boolean checkOnVacation(Employee employee, int weekNumber) {
         List<Integer> holidayWeeks = new ArrayList<>();
 
         //Preparing Holiday week Array
-        for (Holiday holiday : employees.getHolidays()) {
+        for (Holiday holiday : employee.getHolidays()) {
             if (holiday.getHolidayStart() != null) {
-                LocalDate currentWeekDate = Utils.convertToLocalDate(holiday.getHolidayStart());
-                long totalWeeks = Utils.getTotalWeeks(Utils.convertToLocalDate(holiday.getHolidayStart()), Utils.convertToLocalDate(holiday.getHolidayEnd()));
+                LocalDate currentHolidayStartWeekDate = Utils.convertToLocalDate(holiday.getHolidayStart());
+                LocalDate currentHolidayEndWeekDate = Utils.convertToLocalDate(holiday.getHolidayEnd());
+                long totalWeeks = Utils.getTotalWeeks(currentHolidayStartWeekDate, currentHolidayEndWeekDate);
                 for (int j = 0; j <= totalWeeks; j++) {
-                    holidayWeeks.add(Utils.getWeekNumber(currentWeekDate));
-                    currentWeekDate = Utils.getNextWeek(currentWeekDate);
+                    holidayWeeks.add(Utils.getWeekNumber(currentHolidayStartWeekDate));
+                    currentHolidayStartWeekDate = Utils.getNextWeek(currentHolidayStartWeekDate);
                 }
             }
         }
         return holidayWeeks.contains(weekNumber);
     }
 
+    // Check if at least one EXP1 is available for that week
+    public static boolean isExp1Available(List<Employee> employees, int weekNumber) {
+        boolean isExp1Available = false;
+        for (int i = 0; i < employees.size() && !isExp1Available; i++) {
+            if (employees.get(i).getExperience() == ExpLevel.EXP1 && !checkOnVacation(employees.get(i), weekNumber)) {
+                isExp1Available = true;
+            }
+        }
+        return isExp1Available;
+    }
+
     public static void addToEnd(List<Employee> employees, Employee primary, Employee secondary) {
         employees.add(primary);
         employees.add(secondary);
     }
+
+
+    public static List<Employee> pickOnDuty(List<Employee> employees, LocalDate rotaWeekDate) {
+        List<Employee> employeesOnDuty = new ArrayList<>(employees);
+        for (Employee employee : employees) {
+            for (Holiday holiday : employee.getHolidays()) {
+                if (holiday.getHolidayStart() != null) {
+                    LocalDate empHolidayStart = Utils.convertToLocalDate(holiday.getHolidayStart());
+                    LocalDate empHolidayEnd = Utils.convertToLocalDate(holiday.getHolidayEnd());
+                    Boolean isOnHoliday = (!rotaWeekDate.isBefore(empHolidayStart) && rotaWeekDate.isBefore(empHolidayEnd));
+                    if (isOnHoliday) {
+                        employeesOnDuty.remove(employee);
+                        System.out.println(employee.getFirstName() + " isOnHoliday for week " + rotaWeekDate);
+                    }
+                }
+            }
+        }
+        return employeesOnDuty;
+    }
+
+    public static List<Employee> canCreateRota(List<Employee> employeesOnDuty) {
+        List<Employee> employeesOnDutyWithCorrectExp = new ArrayList<>(employeesOnDuty);
+        int exp1EmpCount = 0;
+        int exp3EmpCount = 0;
+        for (Employee employee : employeesOnDuty) {
+            ExpLevel expLevel = employee.getExperience();
+            switch (expLevel) {
+                case EXP1:
+                    exp1EmpCount++;
+                    break;
+                case EXP3:
+                    exp3EmpCount++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        // Remove EXP3 employees if there are no EXP1 available
+        if (exp3EmpCount > 0 && exp1EmpCount == 0) {
+            for (Employee employee : employeesOnDuty) {
+                if (employee.getExperience() == ExpLevel.EXP3) {
+                    employeesOnDutyWithCorrectExp.remove(employee);
+                }
+            }
+        }
+        return employeesOnDutyWithCorrectExp;
+    }
 }
+
