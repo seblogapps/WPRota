@@ -38,25 +38,25 @@ public class Utils {
         return date;
     }
 
-    public static long getTotalWeeks(LocalDate startWeekDate,LocalDate endWeekDate){
+    public static long getTotalWeeks(LocalDate startWeekDate, LocalDate endWeekDate) {
         return ChronoUnit.WEEKS.between(startWeekDate, endWeekDate);
     }
 
-    public static int getWeekNumber(LocalDate date){
+    public static int getWeekNumber(LocalDate date) {
         WeekFields weekFields = WeekFields.of(Locale.getDefault());
-        int weekNumber=date.get(weekFields.weekOfWeekBasedYear());
+        int weekNumber = date.get(weekFields.weekOfWeekBasedYear());
         return weekNumber;
     }
 
-    public static LocalDate getWeekMonday(LocalDate date){
+    public static LocalDate getWeekMonday(LocalDate date) {
         return date.with(DayOfWeek.MONDAY);
     }
 
-    public static LocalDate getWeekSunday(LocalDate date){
+    public static LocalDate getWeekSunday(LocalDate date) {
         return date.with(DayOfWeek.SUNDAY);
     }
 
-    public static LocalDate getNextWeek(LocalDate currentWeekDate){
+    public static LocalDate getNextWeek(LocalDate currentWeekDate) {
         currentWeekDate = currentWeekDate.plusWeeks(1);
         return currentWeekDate;
     }
@@ -69,5 +69,28 @@ public class Utils {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
+    public static boolean areHolidayDatesValid(List<Employee> employees) {
+        for (Employee employee : employees) {
+            for (Holiday holiday : employee.getHolidays()) {
+                if (holiday.getHolidayStart() != null) {
+                    if (holiday.getHolidayEnd() == null) {
+                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday End Date not specified for Start Date: " + holiday.getHolidayStart());
+                        System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                        return false;
+                    } else if (holiday.getHolidayEnd().before(holiday.getHolidayStart())) {
+                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Start holiday:" + holiday.getHolidayStart() + " is after than end Holiday " + holiday.getHolidayEnd());
+                        System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void exitApplication() {
+        System.out.println("Rota Generation unsuccessful" + "\n" + "Exiting from the application");
+        System.exit(0);
+    }
 }
 

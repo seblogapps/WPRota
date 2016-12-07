@@ -106,7 +106,9 @@ public class PickEmployee {
         return isExp1Available;
     }
 
-    public static void addToEnd(List<Employee> employees, Employee primary, Employee secondary) {
+    public static void moveToEnd(List<Employee> employees, Employee primary, Employee secondary) {
+        employees.remove(primary);
+        employees.remove(secondary);
         employees.add(primary);
         employees.add(secondary);
     }

@@ -23,6 +23,10 @@ public class Main {
 
         List<Employee> employees;
         employees = ReadFromCSV.readFromCSVtoEmployees(Utils.EMPLOYEE_CSV_FILENAME);
+
+        if (!Utils.areHolidayDatesValid(employees)) {
+            Utils.exitApplication();
+        }
 //        for (Employee employee : employees) {
 //            System.out.println("employee = " + employee);
 //            for (Holiday holiday : employee.getHolidays()) {
@@ -55,7 +59,7 @@ public class Main {
         Rota rotaToInsert;
         for (int i = 0; i <= weeksForRota; i++) {
 
-            // 1 Clean the employees list and return just the ones not on holiday
+            // 1 Remove employees on holiday, and return just the ones not on holiday
             employeesOnDuty = PickEmployee.pickOnDuty(employees, rotaWeekDate);
             for (Employee employee : employeesOnDuty) {
                 System.out.println("employee on duty for week : " + rotaWeekDate + " - " + employee);
@@ -75,14 +79,14 @@ public class Main {
                 Employee secondary = PickEmployee.pickSecondary(employeesOnDutyWithCorrectExp, primary);
                 System.out.println("*** secondary = " + secondary);
 
-                employees.remove(primary);
-                employees.remove(secondary);
-                PickEmployee.addToEnd(employees, primary, secondary);
+//                employees.remove(primary);
+//                employees.remove(secondary);
+                PickEmployee.moveToEnd(employees, primary, secondary);
 
                 rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
             } else {
                 System.out.println("Not enough employees to generate Rota for rotaWeekDate = " + rotaWeekDate);
-                rotaToInsert = new Rota(rotaWeekDate, "No_available_primary", "No_available_secondary");
+                rotaToInsert = new Rota(rotaWeekDate, "NOT_AVAIL", "NOT_AVAIL");
             }
             rotas.add(rotaToInsert);
 
