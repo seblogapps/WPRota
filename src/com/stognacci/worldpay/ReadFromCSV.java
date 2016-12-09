@@ -1,5 +1,7 @@
 package com.stognacci.worldpay;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.supercsv.cellprocessor.Optional;
 import org.supercsv.cellprocessor.ParseBool;
 import org.supercsv.cellprocessor.ParseDate;
@@ -21,6 +23,8 @@ import java.util.List;
  * Created by sebastianot on 22/11/16.
  */
 public class ReadFromCSV {
+
+    final Logger LOG = LoggerFactory.getLogger(ReadFromCSV.class.getSimpleName());
 
     static final String[] FIELD_MAPPING = new String[]{
             "firstName",

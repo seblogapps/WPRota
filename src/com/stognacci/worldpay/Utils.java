@@ -1,5 +1,8 @@
 package com.stognacci.worldpay;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -16,6 +19,8 @@ import java.util.Scanner;
  * Created by sebastianot on 18/11/16.
  */
 public class Utils {
+
+    final Logger LOG = LoggerFactory.getLogger(Utils.class.getSimpleName());
 
     public static final String DATE_PATTERN = "dd/MM/yyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";

@@ -1,5 +1,7 @@
 package com.stognacci.worldpay;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.supercsv.cellprocessor.FmtBool;
 import org.supercsv.cellprocessor.FmtDate;
 import org.supercsv.cellprocessor.Optional;
@@ -22,6 +24,8 @@ import static com.stognacci.worldpay.ReadFromCSV.FIELD_MAPPING;
 public class WriteToCSV {
 
     static void writeEmployeesToCSV(List<Employee> employees, String csvFileName)  {
+
+        final Logger LOG = LoggerFactory.getLogger(WriteToCSV.class.getSimpleName());
 
         final CellProcessor[] processors = new CellProcessor[]{
                 new NotNull(),                             // firstName

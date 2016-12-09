@@ -6,6 +6,8 @@ import net.fortuna.ical4j.model.parameter.Role;
 import net.fortuna.ical4j.model.property.Attendee;
 import net.fortuna.ical4j.model.property.CalScale;
 import net.fortuna.ical4j.model.property.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        final Logger LOG = LoggerFactory.getLogger(Main.class.getSimpleName());
+
         List<Rota> rotas = new ArrayList<>();
         long weeksForRota = -1;
         LocalDate startWeekDate = null;
@@ -25,6 +29,7 @@ public class Main {
         employees = ReadFromCSV.readFromCSVtoEmployees(Utils.EMPLOYEE_CSV_FILENAME);
 
         if (!Utils.areHolidayDatesValid(employees)) {
+            LOG.error("Invalid holidays in CSV file");
             Utils.exitApplication();
         }
 //        for (Employee employee : employees) {

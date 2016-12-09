@@ -1,5 +1,8 @@
 package com.stognacci.worldpay;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +11,8 @@ import java.util.List;
  * Created by sebastianot on 15/11/16.
  */
 public class PickEmployee {
+
+    final Logger LOG = LoggerFactory.getLogger(PickEmployee.class.getSimpleName());
 
     public static Employee pickPrimary(List<Employee> employees) {
         boolean isPrimary;
