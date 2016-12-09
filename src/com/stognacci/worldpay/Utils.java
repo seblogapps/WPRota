@@ -20,7 +20,7 @@ import java.util.Scanner;
  */
 public class Utils {
 
-    final Logger LOG = LoggerFactory.getLogger(Utils.class.getSimpleName());
+    final static Logger LOG = LoggerFactory.getLogger(Utils.class.getSimpleName());
 
     public static final String DATE_PATTERN = "dd/MM/yyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";
@@ -36,7 +36,8 @@ public class Utils {
             try {
                 date = LocalDate.parse(userInput, dateTimeFormatter);
             } catch (DateTimeParseException e) {
-                System.out.println("Date entered : " + userInput + " is wrong - Any key or enter to try again, n to exit");
+                LOG.error("Date entered {}: is wrong", userInput);
+                System.out.println("Any key or enter to try again, n to exit");
                 String again = scanner.nextLine();
                 if (again.equalsIgnoreCase("n") || again.equalsIgnoreCase("no")) {
                     System.exit(0);
@@ -82,17 +83,17 @@ public class Utils {
             for (Holiday holiday : employee.getHolidays()) {
                 if (holiday.getHolidayStart() != null) {
                     if (holiday.getHolidayEnd() == null) {
-                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday end date not specified for Start Date: " + holiday.getHolidayStart());
-                        System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                        LOG.error("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday end date not specified for Start Date: " + holiday.getHolidayStart());
+                        LOG.error("Please fix CSV, Cannot proceed with ROTA creation");
                         return false;
                     } else if (holiday.getHolidayEnd().before(holiday.getHolidayStart())) {
-                        System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Start holiday:" + holiday.getHolidayStart() + " is after than end Holiday " + holiday.getHolidayEnd());
-                        System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                        LOG.error("Employee: " + employee.getFirstName() + employee.getLastName() + ", Start holiday:" + holiday.getHolidayStart() + " is after than end Holiday " + holiday.getHolidayEnd());
+                        LOG.error("Please fix CSV, Cannot proceed with ROTA creation");
                         return false;
                     }
                 } else if (holiday.getHolidayEnd() != null){
-                    System.out.println("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday start date not specified for End Date: " + holiday.getHolidayEnd());
-                    System.out.println("Please fix CSV, Cannot proceed with ROTA creation");
+                    LOG.error("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday start date not specified for End Date: " + holiday.getHolidayEnd());
+                    LOG.error("Please fix CSV, Cannot proceed with ROTA creation");
                     return false;
                 }
             }
@@ -101,7 +102,7 @@ public class Utils {
     }
 
     public static void exitApplication() {
-        System.out.println("Rota Generation unsuccessful" + "\n" + "Exiting from the application");
+        LOG.error("Rota Generation unsuccessful - Exiting from the application");
         System.exit(0);
     }
 }

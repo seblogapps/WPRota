@@ -23,9 +23,9 @@ import static com.stognacci.worldpay.ReadFromCSV.FIELD_MAPPING;
  */
 public class WriteToCSV {
 
-    static void writeEmployeesToCSV(List<Employee> employees, String csvFileName)  {
+    final static Logger LOG = LoggerFactory.getLogger(WriteToCSV.class.getSimpleName());
 
-        final Logger LOG = LoggerFactory.getLogger(WriteToCSV.class.getSimpleName());
+    static void writeEmployeesToCSV(List<Employee> employees, String csvFileName)  {
 
         final CellProcessor[] processors = new CellProcessor[]{
                 new NotNull(),                             // firstName
@@ -64,13 +64,13 @@ public class WriteToCSV {
                 beanWriter.write(employee, processors);
             }
         } catch (IOException ex) {
-            System.err.println("Could not write the CSV file: " + ex);
+            LOG.error("Could not write the CSV file: " + ex);
         } finally {
             if( beanWriter != null ) {
                 try {
                     beanWriter.close();
                 } catch (IOException ex) {
-                    System.err.println("Error closing the writer: " + ex);
+                    LOG.error("Error closing the writer: " + ex);
                 }
             }
         }

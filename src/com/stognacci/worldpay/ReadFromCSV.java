@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class ReadFromCSV {
 
-    final Logger LOG = LoggerFactory.getLogger(ReadFromCSV.class.getSimpleName());
+    final static Logger LOG = LoggerFactory.getLogger(ReadFromCSV.class.getSimpleName());
 
     static final String[] FIELD_MAPPING = new String[]{
             "firstName",
@@ -83,17 +83,17 @@ public class ReadFromCSV {
                 employees.add(employee);
             }
         } catch (FileNotFoundException ex) {
-            System.err.println("Could not find the CSV file: " + ex);
+            LOG.error("Could not find the CSV file: " + ex);
         } catch (IOException ex) {
-            System.err.println("Error reading the CSV file: " + ex);
+            LOG.error("Error reading the CSV file: " + ex);
         } catch (SuperCsvCellProcessorException ex) {
-            System.err.println("Error in CSV file: " + ex);
+            LOG.error("Error in CSV file: " + ex);
         } finally {
             if (beanReader != null) {
                 try {
                     beanReader.close();
                 } catch (IOException ex) {
-                    System.err.println("Error closing the reader: " + ex);
+                    LOG.error("Error closing the reader: " + ex);
                 }
             }
         }

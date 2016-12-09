@@ -46,18 +46,17 @@ public class Main {
             endWeekDate = Utils.getDate(scanner, "Please enter Rota ending date", Utils.DATE_PATTERN);
             weeksForRota = Utils.getTotalWeeks(startWeekDate, endWeekDate);
             if (weeksForRota <= 0) {
-                System.out.println("End date must be at least 1 week after start date, please enter the dates again");
+                LOG.error("End date must be at least 1 week after start date, please enter the dates again");
             }
-            System.out.println("weeksForRota = " + weeksForRota);
+            LOG.info("Total weeks for Rota generation = {}" , weeksForRota);
         }
 
-//        // Print out employees arraylist
-//        System.out.println("employee List");
-//        for (Employee employee : employees) {
-//            System.out.println(employee);
-//        }
+        // Print out employees arraylist
+        LOG.debug("employee List");
+        for (Employee employee : employees) {
+            LOG.debug(employee.toString());
+        }
 
-        System.out.println("");
         LocalDate rotaWeekDate = startWeekDate;
         List<Employee> employeesOnDuty = new ArrayList<>();
         List<Employee> employeesOnDutyWithCorrectExp = new ArrayList<>();
@@ -67,61 +66,63 @@ public class Main {
             // 1 Remove employees on holiday, and return just the ones not on holiday
             employeesOnDuty = PickEmployee.pickOnDuty(employees, rotaWeekDate);
             for (Employee employee : employeesOnDuty) {
-                System.out.println("employee on duty for week : " + rotaWeekDate + " - " + employee);
+                LOG.debug("employee on duty for week : " + rotaWeekDate + " - " + employee);
             }
             // 2 Check if EXP3 exists, if yes and no EXP1 then remove EXP3 from employees list
             employeesOnDutyWithCorrectExp = PickEmployee.canCreateRota(employeesOnDuty);
             for (Employee employee : employeesOnDutyWithCorrectExp) {
-                System.out.println("employee with correct EXP = " + employee + " for week " + rotaWeekDate);
+                LOG.debug("employee with correct EXP = " + employee + " for week " + rotaWeekDate);
             }
-            System.out.println("employeesOnDutyWithCorrectExp size = " + employeesOnDutyWithCorrectExp.size());
-            // 4 Re add to top of employees list the removed employees
+            LOG.debug("Number of employees with correct EXP for this ROTA = " + employeesOnDutyWithCorrectExp.size());
 
-            // 3 If at least 3 employees, Select primary and secondary
+            // 3 If at least 2 employees, Select primary and secondary
             if (employeesOnDutyWithCorrectExp.size() >= 2) {
                 Employee primary = PickEmployee.pickPrimary(employeesOnDutyWithCorrectExp);
-                System.out.println("*** primary   = " + primary);
+                LOG.debug("Primary = " + primary);
                 Employee secondary = PickEmployee.pickSecondary(employeesOnDutyWithCorrectExp, primary);
-                System.out.println("*** secondary = " + secondary);
+                LOG.debug("Secondary = " + secondary);
 
-//                employees.remove(primary);
-//                employees.remove(secondary);
                 PickEmployee.moveToEnd(employees, primary, secondary);
-
                 rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
             } else {
-                System.out.println("Not enough employees to generate Rota for rotaWeekDate = " + rotaWeekDate);
+                LOG.warn("Not enough employees to generate Rota for Week : {} = {}" , Utils.getWeekNumber(rotaWeekDate), rotaWeekDate);
                 rotaToInsert = new Rota(rotaWeekDate, "NOT_AVAIL", "NOT_AVAIL");
             }
             rotas.add(rotaToInsert);
-
             rotaWeekDate = Utils.getNextWeek(rotaWeekDate);
         }
 
-        // Create new ics calendar
-        Calendar newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
+        if (rotas != null) {
+            // Create new ics calendar
+            Calendar newCal;
+            newCal = iCalUtils.setCalendar("-//Worldpay WPRota//iCal4j 2.0.0//EN", Version.VERSION_2_0, CalScale.GREGORIAN);
 
-        for (Rota rota : rotas) {
-            System.out.println(rota);
-            // Add Rota event to calendar
-            VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek(), Utils.SHIFT_HOUR_HANDOVER);
-            Attendee attendee1 = iCalUtils.setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
-            Attendee attendee2 = iCalUtils.setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
-            rotaEventToAdd.getProperties().add(attendee1);
-            rotaEventToAdd.getProperties().add(attendee2);
-            newCal.getComponents().add(rotaEventToAdd);
+            for (Rota rota : rotas) {
+                //System.out.println(rota);
+                LOG.info("Generated rota: {}", rota);
+                // Add Rota event to calendar
+                VEvent rotaEventToAdd = iCalUtils.setEvent(rota.toStringforEventDescription(), rota.getWeek(), Utils.SHIFT_HOUR_HANDOVER);
+                Attendee attendee1 = iCalUtils.setAttendee(rota.getPrimary(), "Primary", Role.REQ_PARTICIPANT);
+                Attendee attendee2 = iCalUtils.setAttendee(rota.getSecondary(), "Secondary", Role.REQ_PARTICIPANT);
+                rotaEventToAdd.getProperties().add(attendee1);
+                rotaEventToAdd.getProperties().add(attendee2);
+                newCal.getComponents().add(rotaEventToAdd);
+            }
+            // Write generated calendar file
+            if (newCal != null) {
+                iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
+                LOG.info("Calendar written successfully");
+                // Debug print generated calendar
+                LOG.debug("newCal = " + newCal);
+            }
+        } else {
+            LOG.info("No Rota for any week generated, calendar file not created");
         }
-        // Write generated calendar file
-        if (newCal != null) {
-            iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
-        }
 
-        // Debug print generated calendar
-        System.out.println("newCal = " + newCal);
-
-        System.out.println("Employees after Rota is generated");
+        // Debug print new employees arraylist
+        LOG.debug("Employees after Rota is generated");
         for (Employee employee : employees) {
-            System.out.println(employee);
+            LOG.debug("Employee: {}", employee);
         }
 
         // Write the updated employees list to csv file

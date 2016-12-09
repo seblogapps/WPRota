@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class PickEmployee {
 
-    final Logger LOG = LoggerFactory.getLogger(PickEmployee.class.getSimpleName());
+    final static Logger LOG = LoggerFactory.getLogger(PickEmployee.class.getSimpleName());
 
     public static Employee pickPrimary(List<Employee> employees) {
         boolean isPrimary;
@@ -68,7 +68,7 @@ public class PickEmployee {
                         }
                         break;
                     default:
-                        System.out.println("Error occurred");
+                        LOG.error("Error occurred - Invalid EXP level");
                         break;
                 }
             }
@@ -129,7 +129,7 @@ public class PickEmployee {
                     Boolean isOnHoliday = (!rotaWeekDate.isBefore(empHolidayStart) && rotaWeekDate.isBefore(empHolidayEnd));
                     if (isOnHoliday) {
                         employeesOnDuty.remove(employee);
-                        System.out.println(employee.getFirstName() + " isOnHoliday for week " + rotaWeekDate);
+                        LOG.debug(employee.getFirstName() + " is on holiday for week " + rotaWeekDate);
                     }
                 }
             }
