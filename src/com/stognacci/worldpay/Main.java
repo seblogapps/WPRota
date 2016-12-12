@@ -51,7 +51,7 @@ public class Main {
         }
 
         // Print out employees arraylist
-        LOG.debug("employee List");
+        LOG.debug("Employee List:");
         for (Employee employee : employees) {
             LOG.debug(employee.toString());
         }
@@ -72,7 +72,7 @@ public class Main {
             for (Employee employee : employeesOnDutyWithCorrectExp) {
                 LOG.debug("employee with correct EXP = " + employee + " for week " + rotaWeekDate);
             }
-            LOG.debug("Number of employees with correct EXP for this ROTA = " + employeesOnDutyWithCorrectExp.size());
+            LOG.debug("Number of employees that can be used for this ROTA = " + employeesOnDutyWithCorrectExp.size());
 
             // 3 If at least 2 employees, Select primary and secondary
             if (employeesOnDutyWithCorrectExp.size() >= 2) {
@@ -112,14 +112,14 @@ public class Main {
                 iCalUtils.writeIcal(newCal, Utils.ICAL_FILENAME);
                 LOG.info("Calendar written successfully");
                 // Debug print generated calendar
-                LOG.debug("newCal = " + newCal);
+                LOG.debug("Calendar = " + newCal);
             }
         } else {
             LOG.info("No Rota for any week generated, calendar file not created");
         }
 
         // Debug print new employees arraylist
-        LOG.debug("Employees after Rota is generated");
+        LOG.debug("Employees after all Rotas are generated");
         for (Employee employee : employees) {
             LOG.debug("Employee: {}", employee);
         }
