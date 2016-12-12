@@ -19,14 +19,14 @@ public class Rota {
         this.secondary = secondary;
     }
 
-    public Rota(LocalDate week, String primaryName, String secondayName) {
+    public Rota(LocalDate week, String primaryName, String secondaryName) {
         this.week = week;
         this.primary = new Employee();
         this.primary.setFirstName(primaryName);
         this.primary.setLastName("AVAIL");
         this.primary.setExperience(ExpLevel.EXP1);
         this.secondary = new Employee();
-        this.secondary.setFirstName(secondayName);
+        this.secondary.setFirstName(secondaryName);
         this.secondary.setLastName("AVAIL");
         this.secondary.setExperience(ExpLevel.EXP1);
     }
