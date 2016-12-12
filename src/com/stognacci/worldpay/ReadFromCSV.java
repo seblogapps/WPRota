@@ -84,16 +84,20 @@ public class ReadFromCSV {
             }
         } catch (FileNotFoundException ex) {
             LOG.error("Could not find the CSV file: " + ex);
+            Utils.exitApplication();
         } catch (IOException ex) {
             LOG.error("Error reading the CSV file: " + ex);
+            Utils.exitApplication();
         } catch (SuperCsvCellProcessorException ex) {
             LOG.error("Error in CSV file: " + ex);
+            Utils.exitApplication();
         } finally {
             if (beanReader != null) {
                 try {
                     beanReader.close();
                 } catch (IOException ex) {
                     LOG.error("Error closing the reader: " + ex);
+                    Utils.exitApplication();
                 }
             }
         }
