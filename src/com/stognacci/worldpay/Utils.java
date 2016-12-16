@@ -133,7 +133,7 @@ public class Utils {
         try {
             Files.copy(oldFilePath, newFilePath, REPLACE_EXISTING);
         } catch (IOException ex) {
-            LOG.error("{} failed to move to backup folder, Taking backup in current folder - {}", oldFilePath, ex);
+            LOG.error("{} failed to move to backup folder - {}", oldFilePath, ex);
         }
     }
 
