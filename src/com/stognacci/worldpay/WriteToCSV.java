@@ -63,6 +63,7 @@ public class WriteToCSV {
             for (final Employee employee : employees) {
                 beanWriter.write(employee, processors);
             }
+            LOG.info("Csv file updated successfully");
         } catch (IOException ex) {
             LOG.error("Could not write the CSV file: " + ex);
         } finally {

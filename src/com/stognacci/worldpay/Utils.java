@@ -113,7 +113,6 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentDate = LocalDateTime.now().format(formatter);
 
-        //String fileSeparator = System.getProperty("file.separator");
         String directoryName = "RotaBackup";
         File backupDir = new File(directoryName);
 
