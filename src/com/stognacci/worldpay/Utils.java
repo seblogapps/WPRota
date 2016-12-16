@@ -3,8 +3,14 @@ package com.stognacci.worldpay;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 /**
  * Created by sebastianot on 18/11/16.
@@ -91,7 +99,7 @@ public class Utils {
                         LOG.error("Please fix CSV, Cannot proceed with ROTA creation");
                         return false;
                     }
-                } else if (holiday.getHolidayEnd() != null){
+                } else if (holiday.getHolidayEnd() != null) {
                     LOG.error("Employee: " + employee.getFirstName() + employee.getLastName() + ", Holiday start date not specified for End Date: " + holiday.getHolidayEnd());
                     LOG.error("Please fix CSV, Cannot proceed with ROTA creation");
                     return false;
@@ -99,6 +107,34 @@ public class Utils {
             }
         }
         return true;
+    }
+
+    public static void backupEmployeeCSV(String csvFileName) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
+        String currentDate = LocalDateTime.now().format(formatter);
+
+        //String fileSeparator = System.getProperty("file.separator");
+        String directoryName = "RotaBackup";
+        File backupDir = new File(directoryName);
+
+        if (backupDir.exists() && backupDir.isFile()) {
+            LOG.error("The directory with name " + backupDir + " could not be created as it is a normal file");
+        } else {
+            if (!backupDir.exists()) {
+                boolean isDirCreated = backupDir.mkdir();
+                if (!isDirCreated) {
+                    LOG.error("Cannot create directory with name {}", backupDir);
+                    Utils.exitApplication();
+                }
+            }
+        }
+        Path oldFilePath = Paths.get(csvFileName);
+        Path newFilePath = Paths.get(directoryName, currentDate + "_" + csvFileName);
+        try {
+            Files.copy(oldFilePath, newFilePath, REPLACE_EXISTING);
+        } catch (IOException ex) {
+            LOG.error("{} failed to move to backup folder, Taking backup in current folder - {}", oldFilePath, ex);
+        }
     }
 
     public static void exitApplication() {

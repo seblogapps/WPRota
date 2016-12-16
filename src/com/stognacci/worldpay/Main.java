@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-        public static void main(String[] args) {
+    public static void main(String[] args) {
 
         final Logger LOG = LoggerFactory.getLogger(Main.class.getSimpleName());
 
@@ -47,7 +47,7 @@ public class Main {
             if (weeksForRota <= 0) {
                 LOG.error("End date must be at least 1 week after start date, please enter the dates again");
             }
-            LOG.info("Total weeks for Rota generation = {}" , weeksForRota);
+            LOG.info("Total weeks for Rota generation = {}", weeksForRota);
         }
 
         // Print out employees arraylist
@@ -84,7 +84,7 @@ public class Main {
                 PickEmployee.moveToEnd(employees, primary, secondary);
                 rotaToInsert = new Rota(rotaWeekDate, primary, secondary);
             } else {
-                LOG.warn("Not enough employees to generate Rota for Week : {} = {}" , Utils.getWeekNumber(rotaWeekDate), rotaWeekDate);
+                LOG.warn("Not enough employees to generate Rota for Week : {} = {}", Utils.getWeekNumber(rotaWeekDate), rotaWeekDate);
                 rotaToInsert = new Rota(rotaWeekDate, "NOT_AVAIL", "NOT_AVAIL");
             }
             rotas.add(rotaToInsert);
@@ -124,7 +124,10 @@ public class Main {
             LOG.debug("Employee: {}", employee);
         }
 
+        // Take backup of previous CSV file
+        Utils.backupEmployeeCSV(Utils.EMPLOYEE_CSV_FILENAME);
+
         // Write the updated employees list to csv file
-        WriteToCSV.writeEmployeesToCSV(employees, "NewEmployees.csv");
+        WriteToCSV.writeEmployeesToCSV(employees, Utils.EMPLOYEE_CSV_FILENAME);
     }
 }
