@@ -28,7 +28,7 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
  */
 public class Utils {
 
-    final static Logger LOG = LoggerFactory.getLogger(Utils.class.getSimpleName());
+    static final Logger LOG = LoggerFactory.getLogger(Utils.class.getSimpleName());
 
     public static final String DATE_PATTERN = "dd/MM/yyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";
@@ -44,6 +44,7 @@ public class Utils {
             String userInput = scanner.nextLine();
             try {
                 date = LocalDate.parse(userInput, dateTimeFormatter);
+                LOG.debug("Date entered: {} ", date);
             } catch (DateTimeParseException e) {
                 LOG.error("Date entered {}: is wrong", userInput);
                 System.out.println("Any key or enter to try again, n to exit");
@@ -114,7 +115,6 @@ public class Utils {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentDate = LocalDateTime.now().format(formatter);
 
-        //String backupDirName = "RotaBackup";
         File backupDir = new File(backupDirName);
 
         if (backupDir.exists() && backupDir.isFile()) {
@@ -132,6 +132,7 @@ public class Utils {
         Path newFilePath = Paths.get(backupDirName, currentDate + "_" + csvFileName);
         try {
             Files.copy(oldFilePath, newFilePath, REPLACE_EXISTING);
+            LOG.debug("Copied {} to {}", oldFilePath, newFilePath);
         } catch (IOException ex) {
             LOG.error("{} failed to move to backup folder - {}", oldFilePath, ex);
         }

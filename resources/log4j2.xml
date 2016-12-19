@@ -5,7 +5,7 @@
     </Properties>
     <Appenders>
         <RollingFile name="file-log" fileName="${log-path}/WPRota-info.log"
-                     filePattern="${log-path}/WPRota-info-%d{yyyy-MM-dd}.log">
+                     filePattern="${log-path}/WPRota-info-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
