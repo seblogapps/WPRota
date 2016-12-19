@@ -10,8 +10,9 @@
                 <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
             </PatternLayout>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="1 MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="10"/>
         </RollingFile>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout>
