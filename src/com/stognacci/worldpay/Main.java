@@ -125,7 +125,7 @@ public class Main {
         }
 
         // Take backup of previous CSV file
-        Utils.backupEmployeeCSV(Utils.EMPLOYEE_CSV_FILENAME);
+        Utils.backupEmployeeCSV(Utils.EMPLOYEE_CSV_FILENAME, Utils.EMPLOYEE_CSV_BACKUPDIRNAME);
 
         // Write the updated employees list to csv file
         WriteToCSV.writeEmployeesToCSV(employees, Utils.EMPLOYEE_CSV_FILENAME);

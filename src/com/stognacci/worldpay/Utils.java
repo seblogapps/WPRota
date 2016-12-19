@@ -33,6 +33,7 @@ public class Utils {
     public static final String DATE_PATTERN = "dd/MM/yyyy";
     public static final String EMPLOYEE_CSV_FILENAME = "Employees.csv";
     public static final String ICAL_FILENAME = "WPRota.ics";
+    public static final String EMPLOYEE_CSV_BACKUPDIRNAME = "RotaBackup";
     public static final int SHIFT_HOUR_HANDOVER = 9;
 
     public static LocalDate getDate(Scanner scanner, String inputPrompt, String datePattern) {
@@ -109,12 +110,12 @@ public class Utils {
         return true;
     }
 
-    public static void backupEmployeeCSV(String csvFileName) {
+    public static void backupEmployeeCSV(String csvFileName, String backupDirName) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("ddMMyyyy_Hms");
         String currentDate = LocalDateTime.now().format(formatter);
 
-        String directoryName = "RotaBackup";
-        File backupDir = new File(directoryName);
+        //String backupDirName = "RotaBackup";
+        File backupDir = new File(backupDirName);
 
         if (backupDir.exists() && backupDir.isFile()) {
             LOG.error("The directory with name " + backupDir + " could not be created as it is a normal file");
@@ -128,7 +129,7 @@ public class Utils {
             }
         }
         Path oldFilePath = Paths.get(csvFileName);
-        Path newFilePath = Paths.get(directoryName, currentDate + "_" + csvFileName);
+        Path newFilePath = Paths.get(backupDirName, currentDate + "_" + csvFileName);
         try {
             Files.copy(oldFilePath, newFilePath, REPLACE_EXISTING);
         } catch (IOException ex) {
