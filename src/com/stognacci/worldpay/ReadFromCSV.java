@@ -79,7 +79,7 @@ public class ReadFromCSV {
 
             Employee employee;
             while ((employee = beanReader.read(Employee.class, processors)) != null) {
-                //System.out.println(String.format("employee=%s", employee));
+                LOG.debug("Employee read from CSV file {}: ", employee);
                 employees.add(employee);
             }
         } catch (FileNotFoundException ex) {

@@ -24,6 +24,8 @@ public class Main {
         LocalDate startWeekDate = null;
         LocalDate endWeekDate = null;
 
+        LOG.debug("*** WPRota start ***");
+
         List<Employee> employees;
         employees = ReadFromCSV.readFromCSVtoEmployees(Utils.EMPLOYEE_CSV_FILENAME);
 
@@ -129,5 +131,7 @@ public class Main {
 
         // Write the updated employees list to csv file
         WriteToCSV.writeEmployeesToCSV(employees, Utils.EMPLOYEE_CSV_FILENAME);
+
+        LOG.debug("*** WPRota end ***");
     }
 }
